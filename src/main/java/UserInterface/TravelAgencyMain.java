@@ -6,6 +6,8 @@
 
 package UserInterface;
 
+import java.awt.CardLayout;
+
 /**
  *
  * @author zhaoxi
@@ -15,6 +17,8 @@ public class TravelAgencyMain extends javax.swing.JFrame {
     /** Creates new form TravelAgencyMain */
     public TravelAgencyMain() {
         initComponents();
+        setSize(700, 450);
+        setLocation(200, 100);
     }
 
     /** This method is called from within the constructor to
@@ -37,8 +41,18 @@ public class TravelAgencyMain extends javax.swing.JFrame {
         MainSplitPane.setDividerLocation(150);
 
         btnAdmin.setText("Admin");
+        btnAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdminActionPerformed(evt);
+            }
+        });
 
         btnCustomer.setText("Customer");
+        btnCustomer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCustomerActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout leftJPanelLayout = new javax.swing.GroupLayout(leftJPanel);
         leftJPanel.setLayout(leftJPanelLayout);
@@ -63,17 +77,7 @@ public class TravelAgencyMain extends javax.swing.JFrame {
 
         MainSplitPane.setLeftComponent(leftJPanel);
 
-        javax.swing.GroupLayout rightJPanelLayout = new javax.swing.GroupLayout(rightJPanel);
-        rightJPanel.setLayout(rightJPanelLayout);
-        rightJPanelLayout.setHorizontalGroup(
-            rightJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 386, Short.MAX_VALUE)
-        );
-        rightJPanelLayout.setVerticalGroup(
-            rightJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 387, Short.MAX_VALUE)
-        );
-
+        rightJPanel.setLayout(new java.awt.CardLayout());
         MainSplitPane.setRightComponent(rightJPanel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -89,6 +93,20 @@ public class TravelAgencyMain extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminActionPerformed
+        // TODO add your handling code here:
+        CardLayout layout = (CardLayout)rightJPanel.getLayout();
+        rightJPanel.add(new AdminLoginJPanel(rightJPanel));
+        layout.next(rightJPanel);
+    }//GEN-LAST:event_btnAdminActionPerformed
+
+    private void btnCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomerActionPerformed
+        // TODO add your handling code here:
+        CardLayout layout = (CardLayout)rightJPanel.getLayout();
+        rightJPanel.add(new CustomerLoginJPanel(rightJPanel));
+        layout.next(rightJPanel);
+    }//GEN-LAST:event_btnCustomerActionPerformed
 
     /**
      * @param args the command line arguments

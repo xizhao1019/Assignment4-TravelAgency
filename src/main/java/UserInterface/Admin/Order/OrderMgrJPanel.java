@@ -5,17 +5,21 @@
  */
 package UserInterface.Admin.Order;
 
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+
 /**
  *
  * @author zhaoxi
  */
 public class OrderMgrJPanel extends javax.swing.JPanel {
-
+    private JPanel rightJPanel;
     /**
      * Creates new form OrderMgrJPanel
      */
-    public OrderMgrJPanel() {
+    public OrderMgrJPanel(JPanel rightJPanel) {
         initComponents();
+        this.rightJPanel = rightJPanel;
     }
 
     /**
@@ -68,6 +72,11 @@ public class OrderMgrJPanel extends javax.swing.JPanel {
         }
 
         btnBack.setText("<<Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         btnDelete.setText("Delete");
 
@@ -96,6 +105,13 @@ public class OrderMgrJPanel extends javax.swing.JPanel {
                 .addGap(61, 61, 61))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        CardLayout layout = (CardLayout)rightJPanel.getLayout();
+        rightJPanel.remove(this);
+        layout.previous(rightJPanel);
+    }//GEN-LAST:event_btnBackActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

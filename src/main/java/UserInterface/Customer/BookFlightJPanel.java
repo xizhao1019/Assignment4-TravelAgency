@@ -5,17 +5,22 @@
  */
 package UserInterface.Customer;
 
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+
 /**
  *
  * @author zhaoxi
  */
 public class BookFlightJPanel extends javax.swing.JPanel {
 
+    private JPanel rightJPanel;
     /**
      * Creates new form BookFlightJPanel
      */
-    public BookFlightJPanel() {
+    public BookFlightJPanel(JPanel rightJPanel) {
         initComponents();
+        this.rightJPanel = rightJPanel;
     }
 
     /**
@@ -40,6 +45,11 @@ public class BookFlightJPanel extends javax.swing.JPanel {
         });
 
         btnBack.setText("<<Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         flightscheduleTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -99,7 +109,17 @@ public class BookFlightJPanel extends javax.swing.JPanel {
 
     private void btnBookFlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookFlightActionPerformed
         // TODO add your handling code here:
+        CardLayout layout = (CardLayout)rightJPanel.getLayout();
+        rightJPanel.add(new OrderConfirmJPanel(rightJPanel));
+        layout.next(rightJPanel);
     }//GEN-LAST:event_btnBookFlightActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        CardLayout layout = (CardLayout)rightJPanel.getLayout();
+        rightJPanel.remove(this);
+        layout.previous(rightJPanel);
+    }//GEN-LAST:event_btnBackActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

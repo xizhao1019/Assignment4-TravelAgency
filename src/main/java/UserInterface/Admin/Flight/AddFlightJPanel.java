@@ -5,17 +5,23 @@
  */
 package UserInterface.Admin.Flight;
 
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+
 /**
  *
  * @author zhaoxi
  */
 public class AddFlightJPanel extends javax.swing.JPanel {
 
+    private JPanel rightJPanel;
+    
     /**
      * Creates new form AddFlightJPanel
      */
-    public AddFlightJPanel() {
+    public AddFlightJPanel(JPanel rightJPanel) {
         initComponents();
+        this.rightJPanel = rightJPanel;
     }
 
     /**
@@ -85,6 +91,11 @@ public class AddFlightJPanel extends javax.swing.JPanel {
         jLabel7.setText("Duration");
 
         btnBack.setText("<<Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         airplaneComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -223,6 +234,13 @@ public class AddFlightJPanel extends javax.swing.JPanel {
                 .addGap(50, 50, 50))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        CardLayout layout = (CardLayout)rightJPanel.getLayout();
+        rightJPanel.remove(this);
+        layout.previous(rightJPanel);
+    }//GEN-LAST:event_btnBackActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

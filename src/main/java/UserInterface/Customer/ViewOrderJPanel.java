@@ -5,17 +5,22 @@
  */
 package UserInterface.Customer;
 
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+
 /**
  *
  * @author zhaoxi
  */
 public class ViewOrderJPanel extends javax.swing.JPanel {
 
+    private JPanel rightJPanel;
     /**
      * Creates new form ViewOrderJPanel
      */
-    public ViewOrderJPanel() {
+    public ViewOrderJPanel(JPanel rightJPanel) {
         initComponents();
+        this.rightJPanel = rightJPanel;
     }
 
     /**
@@ -32,6 +37,11 @@ public class ViewOrderJPanel extends javax.swing.JPanel {
         orderTable = new javax.swing.JTable();
 
         btnBack.setText("<<Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         orderTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -89,6 +99,13 @@ public class ViewOrderJPanel extends javax.swing.JPanel {
                 .addGap(41, 41, 41))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        CardLayout layout = (CardLayout)rightJPanel.getLayout();
+        rightJPanel.remove(this);
+        layout.previous(rightJPanel);
+    }//GEN-LAST:event_btnBackActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
