@@ -5,17 +5,23 @@
  */
 package UserInterface;
 
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+
 /**
  *
  * @author zhaoxi
  */
 public class AdminLoginJPanel extends javax.swing.JPanel {
 
+    private JPanel rightJPanel;
     /**
      * Creates new form AdminLoginJPanel
      */
-    public AdminLoginJPanel() {
+    public AdminLoginJPanel(JPanel rightJPanel) {
+        this.rightJPanel = rightJPanel;
         initComponents();
+        
     }
 
     /**
@@ -92,7 +98,9 @@ public class AdminLoginJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
-
+        CardLayout layout = (CardLayout)rightJPanel.getLayout();
+        rightJPanel.add(new AdminWorkAreaJPanel(rightJPanel));
+        layout.next(rightJPanel);
     }//GEN-LAST:event_btnSubmitActionPerformed
 
 

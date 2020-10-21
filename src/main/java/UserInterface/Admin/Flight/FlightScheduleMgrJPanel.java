@@ -5,17 +5,23 @@
  */
 package UserInterface.Admin.Flight;
 
+import UserInterface.Admin.Airliner.AddAirlinerJPanel;
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+
 /**
  *
  * @author zhaoxi
  */
 public class FlightScheduleMgrJPanel extends javax.swing.JPanel {
-
+    
+    private JPanel rightJPanel;
     /**
      * Creates new form FlightManagementJPanel
      */
-    public FlightScheduleMgrJPanel() {
+    public FlightScheduleMgrJPanel(JPanel rightJPanel) {
         initComponents();
+        this.rightJPanel = rightJPanel;
     }
 
     /**
@@ -80,6 +86,11 @@ public class FlightScheduleMgrJPanel extends javax.swing.JPanel {
         }
 
         btnAddFlight.setText("Add");
+        btnAddFlight.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddFlightActionPerformed(evt);
+            }
+        });
 
         btnUpdateFlight.setText("Update");
         btnUpdateFlight.addActionListener(new java.awt.event.ActionListener() {
@@ -91,6 +102,11 @@ public class FlightScheduleMgrJPanel extends javax.swing.JPanel {
         btnCancelFlight.setText("Cancel");
 
         btnBack.setText("<<Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -128,7 +144,24 @@ public class FlightScheduleMgrJPanel extends javax.swing.JPanel {
 
     private void btnUpdateFlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateFlightActionPerformed
         // TODO add your handling code here:
+        CardLayout layout = (CardLayout)rightJPanel.getLayout();
+        rightJPanel.add(new UpdateFlightJPanel(rightJPanel));
+        layout.next(rightJPanel);
     }//GEN-LAST:event_btnUpdateFlightActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        CardLayout layout = (CardLayout)rightJPanel.getLayout();
+        rightJPanel.remove(this);
+        layout.previous(rightJPanel);
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnAddFlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddFlightActionPerformed
+        // TODO add your handling code here:
+        CardLayout layout = (CardLayout)rightJPanel.getLayout();
+        rightJPanel.add(new AddFlightJPanel(rightJPanel));
+        layout.next(rightJPanel);
+    }//GEN-LAST:event_btnAddFlightActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -5,17 +5,22 @@
  */
 package UserInterface.Customer;
 
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+
 /**
  *
  * @author zhaoxi
  */
 public class OrderConfirmJPanel extends javax.swing.JPanel {
 
+    private JPanel rightJPanel;
     /**
      * Creates new form OrderConfirmJPanel
      */
-    public OrderConfirmJPanel() {
+    public OrderConfirmJPanel(JPanel rightJPanel) {
         initComponents();
+        this.rightJPanel = rightJPanel;
     }
 
     /**
@@ -89,6 +94,11 @@ public class OrderConfirmJPanel extends javax.swing.JPanel {
         jLabel2.setText("Airliner");
 
         btnCancel.setText("Cancel");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
 
         jLabel9.setText("Order Number");
 
@@ -217,6 +227,13 @@ public class OrderConfirmJPanel extends javax.swing.JPanel {
                 .addGap(20, 20, 20))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        // TODO add your handling code here:
+        CardLayout layout = (CardLayout)rightJPanel.getLayout();
+        rightJPanel.remove(this);
+        layout.previous(rightJPanel);
+    }//GEN-LAST:event_btnCancelActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

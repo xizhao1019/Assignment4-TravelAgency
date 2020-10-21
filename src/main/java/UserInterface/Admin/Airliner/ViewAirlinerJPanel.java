@@ -5,6 +5,8 @@
  */
 package UserInterface.Admin.Airliner;
 
+import javax.swing.JPanel;
+
 /**
  *
  * @author zhaoxi
@@ -14,7 +16,7 @@ public class ViewAirlinerJPanel extends javax.swing.JPanel {
     /**
      * Creates new form ViewAirlinerJPanel
      */
-    public ViewAirlinerJPanel() {
+    public ViewAirlinerJPanel(JPanel rightJPanel) {
         initComponents();
     }
 

@@ -5,17 +5,22 @@
  */
 package UserInterface.Admin.Flight;
 
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+
 /**
  *
  * @author zhaoxi
  */
 public class UpdateFlightJPanel extends javax.swing.JPanel {
-
+    
+    private JPanel rightJPanel;
     /**
      * Creates new form FlightScheduleViewDetailJPanel
      */
-    public UpdateFlightJPanel() {
+    public UpdateFlightJPanel(JPanel rightJPanel) {
         initComponents();
+        this.rightJPanel = rightJPanel;
     }
 
     /**
@@ -55,6 +60,11 @@ public class UpdateFlightJPanel extends javax.swing.JPanel {
         txtFlightNum = new javax.swing.JTextField();
 
         btnBack.setText("<<Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         btnSave.setText("Save");
 
@@ -227,6 +237,13 @@ public class UpdateFlightJPanel extends javax.swing.JPanel {
                     .addContainerGap(119, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        CardLayout layout = (CardLayout)rightJPanel.getLayout();
+        rightJPanel.remove(this);
+        layout.previous(rightJPanel);
+    }//GEN-LAST:event_btnBackActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
