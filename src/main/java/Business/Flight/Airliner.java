@@ -43,7 +43,14 @@ public class Airliner {
         this.flightScheduleCatalog = flightScheduleCatalog;
     }
     
+    @Override
     public String toString() {
         return airlinerName;
+    }
+    
+    // this is push test
+    // will delete later
+    public String pullTest() {
+        return "pull test";
     }
 }
