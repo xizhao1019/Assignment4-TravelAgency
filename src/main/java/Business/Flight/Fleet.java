@@ -5,6 +5,7 @@
  */
 package Business.Flight;
 
+import java.util.List;
 import java.util.ArrayList;
 
 /**
@@ -12,6 +13,21 @@ import java.util.ArrayList;
  * @author suoxiyue
  */
 public class Fleet {
-    private ArrayList<Airplane> fleet;
+    
+    private List<Airplane> fleet;
+    
+    public Fleet(){
+        fleet = new ArrayList<Airplane>();
+    }
+
+    public List<Airplane> getFleet() {
+        return fleet;
+    }
+    
+    public Airplane addAirplane(){
+        Airplane a = new Airplane();
+        fleet.add(a);
+        return a;
+    }
     
 }
