@@ -48,9 +48,4 @@ public class Airliner {
         return airlinerName;
     }
     
-    // this is push test
-    // will delete later
-    public String pullTest() {
-        return "pull test";
-    }
 }
