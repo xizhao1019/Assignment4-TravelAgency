@@ -5,6 +5,7 @@
  */
 package UserInterface;
 
+import Business.Flight.AirlinerDirectory;
 import UserInterface.Admin.Account.AccountMgrJPanel;
 import UserInterface.Admin.Airliner.AirlinerMgrJPanel;
 import UserInterface.Admin.Flight.FlightScheduleMgrJPanel;
@@ -18,11 +19,13 @@ import javax.swing.JPanel;
  */
 public class AdminWorkAreaJPanel extends javax.swing.JPanel {
     private JPanel rightJPanel;
+    private AirlinerDirectory airlinerDir;
     /**
      * Creates new form AdminWorkAreaJPanel
      */
     public AdminWorkAreaJPanel(JPanel rightJPanel) {
         this.rightJPanel = rightJPanel;
+        airlinerDir = new AirlinerDirectory();
         initComponents();
     }
 
@@ -123,9 +126,9 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnAirlinerMgrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAirlinerMgrActionPerformed
         // TODO add your handling code here:
-        
+        AirlinerMgrJPanel alm = new AirlinerMgrJPanel(rightJPanel,airlinerDir);
+        rightJPanel.add("AirlinerMgr",alm);
         CardLayout layout = (CardLayout)rightJPanel.getLayout();
-        rightJPanel.add(new AirlinerMgrJPanel(rightJPanel));
         layout.next(rightJPanel);
     }//GEN-LAST:event_btnAirlinerMgrActionPerformed
 

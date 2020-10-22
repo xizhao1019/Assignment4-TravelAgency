@@ -12,11 +12,11 @@ package Business.Flight;
 public class Airliner {
     private String airlinerName;
     private Fleet fleet;
-    private FlightSchedule flightSchedule;
+    private FlightScheduleCatalog flightScheduleCatalog;
     
     public Airliner() {
         fleet = new Fleet();
-        flightSchedule = new FlightSchedule();
+        flightScheduleCatalog = new FlightScheduleCatalog();
     }
 
     public String getAirlinerName() {
@@ -35,12 +35,12 @@ public class Airliner {
         this.fleet = fleet;
     }
 
-    public FlightSchedule getFlightSchedule() {
-        return flightSchedule;
+    public FlightScheduleCatalog getFlightScheduleCatalog() {
+        return flightScheduleCatalog;
     }
 
-    public void setFlightSchedule(FlightSchedule flightSchedule) {
-        this.flightSchedule = flightSchedule;
+    public void setFlightScheduleCatalog(FlightScheduleCatalog flightScheduleCatalog) {
+        this.flightScheduleCatalog = flightScheduleCatalog;
     }
     
     public String toString() {

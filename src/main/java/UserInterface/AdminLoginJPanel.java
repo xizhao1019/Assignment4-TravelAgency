@@ -40,6 +40,7 @@ public class AdminLoginJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
+        txtTitle.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         txtTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtTitle.setText("Admin Login Screen");
 
@@ -74,7 +75,7 @@ public class AdminLoginJPanel extends javax.swing.JPanel {
                         .addGap(129, 129, 129)
                         .addComponent(txtTitle))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(152, 152, 152)
+                        .addGap(157, 157, 157)
                         .addComponent(btnSubmit)))
                 .addGap(146, 146, 146))
         );
