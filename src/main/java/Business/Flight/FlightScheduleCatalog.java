@@ -14,23 +14,23 @@ import java.util.List;
  */
 public class FlightScheduleCatalog {
     
-    private List<FlightSchedule> flightScheduleCatelog;
+    private List<FlightSchedule> flightScheduleCatalog;
     
     public FlightScheduleCatalog(){
-        flightScheduleCatelog = new ArrayList<FlightSchedule>();
+        flightScheduleCatalog = new ArrayList<FlightSchedule>();
     }
 
-    public List<FlightSchedule> getFlightScheduleCatelog() {
-        return flightScheduleCatelog;
+    public List<FlightSchedule> getFlightScheduleCatalog() {
+        return flightScheduleCatalog;
     }
 
     public void setFlightScheduleCatelog(List<FlightSchedule> flightScheduleCatelog) {
-        this.flightScheduleCatelog = flightScheduleCatelog;
+        this.flightScheduleCatalog = flightScheduleCatelog;
     }
     
     public FlightSchedule addFlight(){
-        FlightSchedule flight = new FlightSchedule() ;
-        flightScheduleCatelog.add(flight);
-        return flight;
+        FlightSchedule flightschedule = new FlightSchedule() ;
+        flightScheduleCatalog.add(flightschedule);
+        return flightschedule;
     }
 }

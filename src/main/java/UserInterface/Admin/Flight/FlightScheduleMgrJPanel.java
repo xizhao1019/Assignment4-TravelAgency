@@ -5,9 +5,14 @@
  */
 package UserInterface.Admin.Flight;
 
+import Business.Flight.AirlinerDirectory;
+import Business.Flight.FlightSchedule;
+import Business.Flight.FlightScheduleCatalog;
 import UserInterface.Admin.Airliner.AddAirlinerJPanel;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,12 +21,40 @@ import javax.swing.JPanel;
 public class FlightScheduleMgrJPanel extends javax.swing.JPanel {
     
     private JPanel rightJPanel;
+    private AirlinerDirectory airlinerDir;
+    private FlightScheduleCatalog fsc;
     /**
      * Creates new form FlightManagementJPanel
      */
-    public FlightScheduleMgrJPanel(JPanel rightJPanel) {
+    public FlightScheduleMgrJPanel(JPanel rightJPanel, AirlinerDirectory ad, FlightScheduleCatalog fsc) {
         initComponents();
         this.rightJPanel = rightJPanel;
+        this.airlinerDir = ad;
+        this.fsc = fsc;
+        populateTable();
+        System.out.println(fsc.getFlightScheduleCatalog().size());
+    }
+    
+        public void populateTable() {
+        DefaultTableModel model = (DefaultTableModel)flightscheduleTable.getModel();
+        model.setRowCount(0);
+        for(FlightSchedule fs : fsc.getFlightScheduleCatalog()){
+            Object row[] = new Object[13];
+            row[0] = fs;
+            row[1] = fs.getAirliner();
+            row[2] = fs.getAirplane();
+            row[3] = fs.getFrom();
+            row[4] = fs.getTo();
+            row[5] = fs.getDate();
+            row[6] = fs.getDepartureTime();
+            row[7] = fs.getArrivalTime();
+            row[8] = fs.getDuraiton();
+            row[9] = "150";
+            row[10] = "xxx";
+            row[11] = Integer.toString(fs.getPrice());
+            row[12] = fs.getStatus();
+            model.addRow(row);
+        }
     }
 
     /**
@@ -43,17 +76,14 @@ public class FlightScheduleMgrJPanel extends javax.swing.JPanel {
 
         flightscheduleTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
-                "Flight No.", "Airliner", "Airplane", "From", "To", "Date", "Departure", "Arrival", "Duration", "Capacity", "Remaining", "Price"
+                "Flight No.", "Airliner", "Airplane", "From", "To", "Date", "Departure", "Arrival", "Duration", "Capacity", "Remaining", "Price", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -84,6 +114,7 @@ public class FlightScheduleMgrJPanel extends javax.swing.JPanel {
             flightscheduleTable.getColumnModel().getColumn(10).setPreferredWidth(50);
             flightscheduleTable.getColumnModel().getColumn(11).setResizable(false);
             flightscheduleTable.getColumnModel().getColumn(11).setPreferredWidth(50);
+            flightscheduleTable.getColumnModel().getColumn(12).setResizable(false);
         }
 
         btnAddFlight.setText("Add");
@@ -119,23 +150,23 @@ public class FlightScheduleMgrJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnAddFlight, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnUpdateFlight)
-                                .addGap(547, 547, 547)
-                                .addComponent(btnCancelFlight))
-                            .addComponent(btnBack))
-                        .addGap(0, 0, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel17)
-                .addGap(283, 283, 283))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jScrollPane1)
+                            .addContainerGap())
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(btnAddFlight, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(btnUpdateFlight)
+                                    .addGap(547, 547, 547)
+                                    .addComponent(btnCancelFlight))
+                                .addComponent(btnBack))
+                            .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel17)
+                        .addGap(283, 283, 283))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,6 +188,12 @@ public class FlightScheduleMgrJPanel extends javax.swing.JPanel {
 
     private void btnUpdateFlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateFlightActionPerformed
         // TODO add your handling code here:
+        int row = flightscheduleTable.getSelectedRow();
+        if(row<0){
+            JOptionPane.showMessageDialog(null, "Pls select a row!!", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
         CardLayout layout = (CardLayout)rightJPanel.getLayout();
         rightJPanel.add(new UpdateFlightJPanel(rightJPanel));
         layout.next(rightJPanel);
@@ -172,7 +209,7 @@ public class FlightScheduleMgrJPanel extends javax.swing.JPanel {
     private void btnAddFlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddFlightActionPerformed
         // TODO add your handling code here:
         CardLayout layout = (CardLayout)rightJPanel.getLayout();
-        rightJPanel.add(new AddFlightJPanel(rightJPanel));
+        rightJPanel.add(new AddFlightJPanel(rightJPanel, airlinerDir, fsc));
         layout.next(rightJPanel);
     }//GEN-LAST:event_btnAddFlightActionPerformed
 

@@ -5,7 +5,18 @@
  */
 package UserInterface.Admin.Flight;
 
+import Business.Flight.Airliner;
+import Business.Flight.AirlinerDirectory;
+import Business.Flight.Airplane;
+import Business.Flight.FlightSchedule;
+import Business.Flight.FlightScheduleCatalog;
+import UserInterface.Admin.Airliner.AirlinerMgrJPanel;
 import java.awt.CardLayout;
+import java.awt.Component;
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -15,13 +26,32 @@ import javax.swing.JPanel;
 public class AddFlightJPanel extends javax.swing.JPanel {
 
     private JPanel rightJPanel;
+    private AirlinerDirectory airlinerDir;
+    private FlightSchedule fs;
+    private FlightScheduleCatalog fsc;
     
     /**
      * Creates new form AddFlightJPanel
      */
-    public AddFlightJPanel(JPanel rightJPanel) {
+    public AddFlightJPanel(JPanel rightJPanel, AirlinerDirectory ad, FlightScheduleCatalog fsc) {
         initComponents();
         this.rightJPanel = rightJPanel;
+        this.airlinerDir = ad;
+        this.fsc = fsc;
+        
+        initialize();
+    }
+    
+    private void initialize(){
+        airlinerComboBox.removeAllItems();
+        for (Airliner airliner: airlinerDir.getAirlinerDirectory()) {
+            airlinerComboBox.addItem(airliner);
+            
+            for (Airplane airplane : airliner.getFleet().getFleet()) {
+                airplaneComboBox.addItem(airplane);              
+            }
+        }
+        
     }
 
     /**
@@ -47,11 +77,11 @@ public class AddFlightJPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         txtDepartureTime = new javax.swing.JTextField();
-        airlinerComboBox = new javax.swing.JComboBox<>();
+        airlinerComboBox = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
-        airplaneComboBox = new javax.swing.JComboBox<>();
+        airplaneComboBox = new javax.swing.JComboBox();
         btnSave = new javax.swing.JButton();
         txtCapacity = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
@@ -83,7 +113,7 @@ public class AddFlightJPanel extends javax.swing.JPanel {
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Arrival Time");
 
-        airlinerComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        airlinerComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Airplane");
@@ -98,9 +128,12 @@ public class AddFlightJPanel extends javax.swing.JPanel {
             }
         });
 
-        airplaneComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BOEING-B747", "BOEING-B767", "BOEING-B737", "AIRBUS-A380", "AIRBUS-A330", "AIRBUS-A319" }));
-
         btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
 
         txtCapacity.setEnabled(false);
 
@@ -137,15 +170,16 @@ public class AddFlightJPanel extends javax.swing.JPanel {
                                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(3, 3, 3)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(airlinerComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtFlightNum, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(airplaneComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(airlinerComboBox, 0, 110, Short.MAX_VALUE)
+                                    .addComponent(txtFlightNum, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+                                    .addComponent(airplaneComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtTo, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -215,18 +249,14 @@ public class AddFlightJPanel extends javax.swing.JPanel {
                                         .addComponent(jLabel12)
                                         .addComponent(statusComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(txtArrivalTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(txtDuration, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel7)
-                                        .addComponent(jLabel11))
-                                    .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(DateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtDuration, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel7)
+                                .addComponent(jLabel11))
+                            .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(DateChooser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
@@ -248,16 +278,62 @@ public class AddFlightJPanel extends javax.swing.JPanel {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
-        CardLayout layout = (CardLayout)rightJPanel.getLayout();
+        
         rightJPanel.remove(this);
+        Component [] componentArray = rightJPanel.getComponents();
+        Component c = componentArray[componentArray.length-1];
+        FlightScheduleMgrJPanel fsm = (FlightScheduleMgrJPanel) c;
+        fsm.populateTable();
+        CardLayout layout = (CardLayout) rightJPanel.getLayout();
         layout.previous(rightJPanel);
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        // TODO add your handling code here:
+        
+        
+        fs = fsc.addFlight();
+        
+        //fs = airliner.getFlightScheduleCatalog().addFlight();
+        fs.setPrice(Integer.parseInt(txtPrice.getText()));
+        
+        Airliner airliner = (Airliner)airlinerComboBox.getSelectedItem();
+        fs.setAirliner(airliner);
+        
+        // will add airplane based on the airliner
+        Airplane airplane = (Airplane)airplaneComboBox.getSelectedItem();
+        fs.setAirplane(airplane);
+        /*
+        BOEING-B747
+        BOEING-B767
+        BOEING-B737
+        AIRBUS-A380
+        AIRBUS-A330
+        AIRBUS-A319
+        */
+        
+        fs.setFlightNumber(txtFlightNum.getText());
+        fs.setFrom(txtFrom.getText());
+        fs.setTo(txtTo.getText());
+        fs.setDepartureTime(txtDepartureTime.getText());
+        fs.setArrivalTime(txtArrivalTime.getText());
+        fs.setStatus(statusComboBox.getSelectedItem().toString());
+        
+        Date date = DateChooser.getDate();
+        String strDate = DateFormat.getDateInstance().format(date);
+        fs.setDate(strDate);
+        fs.setDuraiton(txtDuration.getText());
+        
+        
+        
+        JOptionPane.showMessageDialog(null, "add flight success");
+    }//GEN-LAST:event_btnSaveActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser DateChooser;
-    private javax.swing.JComboBox<String> airlinerComboBox;
-    private javax.swing.JComboBox<String> airplaneComboBox;
+    private javax.swing.JComboBox airlinerComboBox;
+    private javax.swing.JComboBox airplaneComboBox;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnSave;
     private javax.swing.ButtonGroup buttonGroup1;

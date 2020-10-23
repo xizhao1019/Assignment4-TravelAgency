@@ -33,7 +33,7 @@ public class ViewAirlinerJPanel extends javax.swing.JPanel {
         DefaultTableModel dtm = (DefaultTableModel) viewAirlinerTable.getModel();
         dtm.setRowCount(0);
         
-        for(FlightSchedule flight: airliner.getFlightScheduleCatalog().getFlightScheduleCatelog()){
+        for(FlightSchedule flight: airliner.getFlightScheduleCatalog().getFlightScheduleCatalog()){
             Object[] row = new Object[13];
             row[0] = flight.getAirliner();
             row[1] = flight;
