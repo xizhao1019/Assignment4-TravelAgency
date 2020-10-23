@@ -10,7 +10,7 @@ package Business.Flight;
  * @author zhaoxi
  */
 public class FlightSchedule {
-    private int flightNumber;
+    private String flightNumber;
     private Airliner airliner;
     private Airplane airplane;
     private String from;
@@ -21,13 +21,13 @@ public class FlightSchedule {
     private String duraiton;
     private String status;
     private int remaining;
-    private double price;
+    private int price;
 
-    public int getFlightNumber() {
+    public String getFlightNumber() {
         return flightNumber;
     }
 
-    public void setFlightNumber(int flightNumber) {
+    public void setFlightNumber(String flightNumber) {
         this.flightNumber = flightNumber;
     }
 
@@ -111,17 +111,17 @@ public class FlightSchedule {
         this.remaining = remaining;
     }
     
-    public double getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(int price) {
         this.price = price;
     }
            
     @Override
     public String toString(){
-        return Integer.toString(flightNumber);
+        return flightNumber;
     }
             
    

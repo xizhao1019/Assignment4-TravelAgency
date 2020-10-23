@@ -37,7 +37,7 @@ public class AirlinerMgrJPanel extends javax.swing.JPanel {
         for(Airliner airliner: airlinerDir.getAirlinerDirectory()){
             Object[] row = new Object[3];
             row[0] = airliner;
-            row[1] = airliner.getFlightScheduleCatalog().getFlightScheduleCatelog().size();
+            row[1] = airliner.getFlightScheduleCatalog().getFlightScheduleCatalog().size();
             row[2] = airliner.getFleet().getFleet().size();
             
             dtm.addRow(row);

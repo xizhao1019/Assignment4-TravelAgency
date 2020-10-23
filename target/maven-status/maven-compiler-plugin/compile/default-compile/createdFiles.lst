@@ -13,6 +13,7 @@ Business/User/Account.class
 UserInterface/Admin/Flight/UpdateFlightJPanel$1.class
 UserInterface/Admin/Flight/FlightScheduleMgrJPanel$3.class
 UserInterface/Admin/Airliner/AirlinerMgrJPanel$5.class
+UserInterface/Admin/Flight/AddFlightJPanel$2.class
 UserInterface/Customer/BookFlightJPanel.class
 UserInterface/Admin/Flight/FlightScheduleMgrJPanel.class
 UserInterface/Admin/Airliner/AirlinerMgrJPanel$3.class
