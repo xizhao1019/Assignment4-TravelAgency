@@ -8,6 +8,7 @@ package UserInterface.Admin.Airliner;
 
 import Business.Flight.Airliner;
 import Business.Flight.AirlinerDirectory;
+import Business.Flight.FlightScheduleCatalog;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -21,6 +22,7 @@ public class AirlinerMgrJPanel extends javax.swing.JPanel {
    
     private JPanel rightJPanel;
     private AirlinerDirectory airlinerDir;
+    private FlightScheduleCatalog fsc;
     
     /** Creates new form AirlinerManagementJPanel */
     public AirlinerMgrJPanel(JPanel rightJPanel, AirlinerDirectory airlinerDir) {
@@ -183,7 +185,7 @@ public class AirlinerMgrJPanel extends javax.swing.JPanel {
         if(selectedRow >= 0){
             
              Airliner airliner = (Airliner)airlinerTable.getValueAt(selectedRow, 0);
-             ViewAirlinerJPanel panel = new ViewAirlinerJPanel(rightJPanel, airliner);
+             ViewAirlinerJPanel panel = new ViewAirlinerJPanel(rightJPanel, airliner, fsc);
              rightJPanel.add("ViewAirlinerJPanel", panel);
              CardLayout layout = (CardLayout) rightJPanel.getLayout();
              layout.next(rightJPanel);

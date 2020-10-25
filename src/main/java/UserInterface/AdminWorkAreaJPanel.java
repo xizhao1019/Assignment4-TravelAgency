@@ -5,6 +5,7 @@
  */
 package UserInterface;
 
+import Business.Flight.Airliner;
 import Business.Flight.AirlinerDirectory;
 import Business.Flight.FlightScheduleCatalog;
 import UserInterface.Admin.Account.AccountMgrJPanel;
@@ -21,6 +22,7 @@ import javax.swing.JPanel;
 public class AdminWorkAreaJPanel extends javax.swing.JPanel {
     private JPanel rightJPanel;
     private AirlinerDirectory airlinerDir;
+    private Airliner airliner;
     private FlightScheduleCatalog fsc;
     /**
      * Creates new form AdminWorkAreaJPanel
@@ -101,13 +103,13 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(48, 48, 48)
                 .addComponent(jLabel1)
-                .addGap(53, 53, 53)
-                .addComponent(btnFlightscheduleMgr)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(65, 65, 65)
                 .addComponent(btnAirlinerMgr)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnFlightscheduleMgr)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnOrderMgr)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnAccountMgr)
                 .addGap(76, 76, 76))
         );
@@ -122,7 +124,7 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnFlightscheduleMgrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFlightscheduleMgrActionPerformed
         // TODO add your handling code here:      
-        FlightScheduleMgrJPanel fsm = new FlightScheduleMgrJPanel(rightJPanel, airlinerDir, fsc);
+        FlightScheduleMgrJPanel fsm = new FlightScheduleMgrJPanel(rightJPanel,airlinerDir, airliner, fsc);
         rightJPanel.add("FlightScheduleMgrJPanel", fsm);
         CardLayout layout = (CardLayout)rightJPanel.getLayout();
         layout.next(rightJPanel);

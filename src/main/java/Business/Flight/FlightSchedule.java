@@ -15,13 +15,18 @@ public class FlightSchedule {
     private Airplane airplane;
     private String from;
     private String to;
-    private String date;
+    private String departureDate;
+    private String departureHour;
+    private String departureMin;
     private String departureTime;
+    private String arrivalDate;
+    private String arrivalHour;
+    private String arrivalMin;
     private String arrivalTime;
     private String duraiton;
     private String status;
     private int remaining;
-    private int price;
+    private double price;
 
     public String getFlightNumber() {
         return flightNumber;
@@ -63,12 +68,52 @@ public class FlightSchedule {
         this.to = to;
     }
 
-    public String getDate() {
-        return date;
+    public String getDepartureDate() {
+        return departureDate;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setDepartureDate(String departureDate) {
+        this.departureDate = departureDate;
+    }
+
+    public String getDepartureHour() {
+        return departureHour;
+    }
+
+    public void setDepartureHour(String departureHour) {
+        this.departureHour = departureHour;
+    }
+
+    public String getDepartureMin() {
+        return departureMin;
+    }
+
+    public void setDepartureMin(String departureMin) {
+        this.departureMin = departureMin;
+    }
+
+    public String getArrivalDate() {
+        return arrivalDate;
+    }
+
+    public void setArrivalDate(String arrivalDate) {
+        this.arrivalDate = arrivalDate;
+    }
+
+    public String getArrivalHour() {
+        return arrivalHour;
+    }
+
+    public void setArrivalHour(String arrivalHour) {
+        this.arrivalHour = arrivalHour;
+    }
+
+    public String getArrivalMin() {
+        return arrivalMin;
+    }
+
+    public void setArrivalMin(String arrivalMin) {
+        this.arrivalMin = arrivalMin;
     }
 
     public String getDepartureTime() {
@@ -87,6 +132,8 @@ public class FlightSchedule {
         this.arrivalTime = arrivalTime;
     }
 
+    
+    
     public String getDuraiton() {
         return duraiton;
     }
@@ -111,7 +158,7 @@ public class FlightSchedule {
         this.remaining = remaining;
     }
     
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 

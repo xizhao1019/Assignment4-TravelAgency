@@ -33,4 +33,8 @@ public class FlightScheduleCatalog {
         flightScheduleCatalog.add(flightschedule);
         return flightschedule;
     }
+    
+    public void removeFlight(FlightSchedule fs){
+        flightScheduleCatalog.remove(fs);
+    }
 }
