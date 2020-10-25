@@ -25,7 +25,7 @@ public class TravelAgencyMain extends javax.swing.JFrame {
     public TravelAgencyMain() {
         
         initComponents();
-        setSize(1200, 500);
+        setSize(800, 500);
         setLocation(200, 100);
         flightScheduleCatalog = new FlightScheduleCatalog();
         airlinerDirectory = new AirlinerDirectory();
@@ -58,7 +58,7 @@ public class TravelAgencyMain extends javax.swing.JFrame {
                 btnAdminActionPerformed(evt);
             }
         });
-        leftJPanel.add(btnAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 152, 105, -1));
+        leftJPanel.add(btnAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 110, -1));
 
         btnCustomer.setText("Customer");
         btnCustomer.addActionListener(new java.awt.event.ActionListener() {
@@ -66,7 +66,7 @@ public class TravelAgencyMain extends javax.swing.JFrame {
                 btnCustomerActionPerformed(evt);
             }
         });
-        leftJPanel.add(btnCustomer, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 212, -1, -1));
+        leftJPanel.add(btnCustomer, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 110, 30));
 
         MainSplitPane.setLeftComponent(leftJPanel);
 

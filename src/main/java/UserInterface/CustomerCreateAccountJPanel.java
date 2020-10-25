@@ -104,7 +104,7 @@ public class CustomerCreateAccountJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel3))
                 .addGap(39, 39, 39)
                 .addComponent(btnCreate)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addGap(28, 28, 28))
         );
     }// </editor-fold>//GEN-END:initComponents
 
