@@ -23,10 +23,15 @@ public class FlightSchedule {
     private String arrivalHour;
     private String arrivalMin;
     private String arrivalTime;
-    private String duraiton;
     private String status;
-    private int remaining;
+    
     private double price;
+    
+    private SeatList seatList;
+
+    public FlightSchedule() {
+        seatList = new SeatList();
+    }
 
     public String getFlightNumber() {
         return flightNumber;
@@ -132,16 +137,6 @@ public class FlightSchedule {
         this.arrivalTime = arrivalTime;
     }
 
-    
-    
-    public String getDuraiton() {
-        return duraiton;
-    }
-
-    public void setDuraiton(String duraiton) {
-        this.duraiton = duraiton;
-    }
-
     public String getStatus() {
         return status;
     }
@@ -150,22 +145,23 @@ public class FlightSchedule {
         this.status = status;
     }
 
-    public int getRemaining() {
-        return remaining;
-    }
-
-    public void setRemaining(int remaining) {
-        this.remaining = remaining;
-    }
-    
     public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
-           
+
+    public SeatList getSeatList() {
+        return seatList;
+    }
+
+    public void setSeatList(SeatList seatList) {
+        this.seatList = seatList;
+    }
+
+
     @Override
     public String toString(){
         return flightNumber;

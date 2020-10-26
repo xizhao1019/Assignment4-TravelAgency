@@ -27,10 +27,9 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
     /**
      * Creates new form AdminWorkAreaJPanel
      */
-    public AdminWorkAreaJPanel(JPanel rightJPanel, AirlinerDirectory ad, FlightScheduleCatalog fsc) {
+    public AdminWorkAreaJPanel(JPanel rightJPanel, AirlinerDirectory ad) {
         this.rightJPanel = rightJPanel;
         this.airlinerDir = ad;
-        this.fsc = fsc;
         initComponents();
     }
 
@@ -124,7 +123,7 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnFlightscheduleMgrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFlightscheduleMgrActionPerformed
         // TODO add your handling code here:      
-        FlightScheduleMgrJPanel fsm = new FlightScheduleMgrJPanel(rightJPanel,airlinerDir, airliner, fsc);
+        FlightScheduleMgrJPanel fsm = new FlightScheduleMgrJPanel(rightJPanel,airlinerDir, airliner);
         rightJPanel.add("FlightScheduleMgrJPanel", fsm);
         CardLayout layout = (CardLayout)rightJPanel.getLayout();
         layout.next(rightJPanel);
