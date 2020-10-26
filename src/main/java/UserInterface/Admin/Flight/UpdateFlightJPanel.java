@@ -5,10 +5,11 @@
  */
 package UserInterface.Admin.Flight;
 
-import Business.Flight.Airliner;
+import Business.Flight.AirlinerDirectory;
 import Business.Flight.Airplane;
 import Business.Flight.FlightSchedule;
 import java.awt.CardLayout;
+import java.awt.Component;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -25,81 +26,57 @@ public class UpdateFlightJPanel extends javax.swing.JPanel {
     
     private JPanel rightJPanel;
     private FlightSchedule fs;
+    private AirlinerDirectory airlinerDir;
     /**
      * Creates new form FlightScheduleViewDetailJPanel
      */
-    public UpdateFlightJPanel(JPanel rightJPanel,FlightSchedule fs ) throws ParseException {
+    public UpdateFlightJPanel(JPanel rightJPanel,FlightSchedule fs, AirlinerDirectory airlinerDir) throws ParseException {
         initComponents();
         this.rightJPanel = rightJPanel;
         this.fs = fs;
+        this.airlinerDir = airlinerDir;
+        
         txtFlightNum.setText(fs.getFlightNumber());
         txtFrom.setText(fs.getFrom());
         txtTo.setText(fs.getTo());
 
-        departureDateChooser.setDate(dateConvert(fs.getDepartureDate()));
-        departureHourComboBox.setSelectedItem(String.valueOf(timeConvert(fs.getDepartureTime()).getHours()));
-        departureMinComboBox.setSelectedItem(String.valueOf(timeConvert(fs.getDepartureTime()).getMinutes()));
+        departureDateChooser.setDate(stringToDate(fs.getDepartureDate()));
+        departureHourComboBox.setSelectedItem(fs.getDepartureHour());
+        departureMinComboBox.setSelectedItem(fs.getDepartureMin());
 
-        arrivalDateChooser.setDate(dateConvert(fs.getArrivalDate()));
-        arrivalHourComboBox.setSelectedItem(String.valueOf(timeConvert(fs.getArrivalTime()).getHours()));
-        arrivalMinComboBox.setSelectedItem(String.valueOf(timeConvert(fs.getArrivalTime()).getMinutes()));
+        arrivalDateChooser.setDate(stringToDate(fs.getArrivalDate()));
+        arrivalHourComboBox.setSelectedItem(fs.getArrivalHour());
+        arrivalMinComboBox.setSelectedItem(fs.getArrivalMin());
 
         txtCapacity.setText(String.valueOf(fs.getAirplane().getCapacity()));
         txtPrice.setText(String.valueOf(fs.getPrice()));
+        
+        comboBoxInitialize();
+        
     }
     
-    public Date dateConvert(String s) throws ParseException{
+    private void comboBoxInitialize(){
+        airlinerComboBox.setEnabled(false);
+        airlinerComboBox.removeAllItems();
+        airlinerComboBox.addItem(fs.getAirliner());
+       
+        for (Airplane airplane : fs.getAirliner().getFleet().getFleet()) {
+            airplaneComboBox.addItem(airplane);              
+        }
+        airplaneComboBox.setSelectedItem(fs.getAirplane());
+    }
+    
+    public Date stringToDate(String s) throws ParseException{
         SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy");
         Date date = format.parse(s);
         return date;
     }
     
-    public Date timeConvert(String s) throws ParseException{
-        SimpleDateFormat format = new SimpleDateFormat("HH:MM");
-        Date date = format.parse(s);
-        return date;
-    }
-    
-    public Date dateTimeConvert(String s) throws ParseException{
-        SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy HH:MM");
-        Date date = format.parse(s);
-        return date;
-    }
-    
-    public String departureDate(){
-        Date date = departureDateChooser.getDate();
+    public String dateToString(Date date){
         SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy");
-        String departureDate = format.format(date);
-        return departureDate;
+        String dateToString = format.format(date);
+        return dateToString;
     }
-    
-    public String departureTime(){
-        String departureTime = String.valueOf(departureHourComboBox.getSelectedItem()) + ":" + String.valueOf(departureMinComboBox.getSelectedItem());
-        return departureTime;
-    }
-    
-    public String departureDateTime(){
-        String ddt = departureDate() + " " +  departureTime();
-        return ddt;
-    }
-    
-    public String arrivalDate(){
-        Date date = arrivalDateChooser.getDate();
-        SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy");
-        String arrivalDate = format.format(date);
-        return arrivalDate;
-    }
-    
-    public String arrivalTime(){
-        String arrivalTime = String.valueOf(arrivalHourComboBox.getSelectedItem()) + ":" + String.valueOf(arrivalMinComboBox.getSelectedItem());
-        return arrivalTime;
-    }
-    
-    public String arrivalDateTime(){
-        String adt = arrivalDate() + " " +  arrivalTime();
-        return adt;
-    }
-    
     
     private boolean inputNumberCorrect(String s){
         Pattern p = Pattern.compile("^[0-9]+$");
@@ -109,6 +86,12 @@ public class UpdateFlightJPanel extends javax.swing.JPanel {
     }
     private boolean inputStringCorrect(String s){
         Pattern p = Pattern.compile("^[a-zA-Z]+$");
+        Matcher m = p.matcher(s);
+        boolean input = m.matches();
+        return input;
+    }
+    private boolean inputPriceCorrect(String s){
+        Pattern p = Pattern.compile("^[0-9]+[.]*[0-9]+$");
         Matcher m = p.matcher(s);
         boolean input = m.matches();
         return input;
@@ -126,11 +109,42 @@ public class UpdateFlightJPanel extends javax.swing.JPanel {
         if (txtTo.getText().equals("") || !inputStringCorrect(txtTo.getText())) {
             inputfieldValid = false;
         }
-        if (txtPrice.getText().equals("") || !inputNumberCorrect(txtPrice.getText())) {
+        if (txtPrice.getText().equals("") || !inputPriceCorrect(txtPrice.getText())) {
             inputfieldValid = false;
         }
         
         return inputfieldValid;
+    }
+    
+    public boolean DateInput() throws ParseException{
+        boolean DateInput = false;
+        
+        String departureDate = dateToString(departureDateChooser.getDate());
+        String departureHour = String.valueOf(departureHourComboBox.getSelectedItem());
+        String departureMin = String.valueOf(departureMinComboBox.getSelectedItem());
+        
+        String arrivalDate = dateToString(arrivalDateChooser.getDate());
+        String arrivalHour = String.valueOf(arrivalHourComboBox.getSelectedItem());
+        String ariivalMin = String.valueOf(arrivalMinComboBox.getSelectedItem());
+                
+        int dateDiff = departureDate.compareTo(arrivalDate);
+        int hourDiff = departureHour.compareTo(arrivalHour);
+        int minDiff = departureMin.compareTo(ariivalMin);
+        
+        if (dateDiff < 0) {
+            DateInput = true;
+        }
+        if (dateDiff == 0) {
+            if (hourDiff < 0) {
+                DateInput = true;
+            }
+            if (hourDiff == 0) {
+                if (minDiff < 0) {
+                    DateInput = true;
+                }
+            }
+        }
+        return DateInput;
     }
 
     /**
@@ -385,9 +399,12 @@ public class UpdateFlightJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        // TODO add your handling code here:
-        CardLayout layout = (CardLayout)rightJPanel.getLayout();
         rightJPanel.remove(this);
+        Component [] componentArray = rightJPanel.getComponents();
+        Component c = componentArray[componentArray.length-1];
+        FlightScheduleMgrJPanel fsm = (FlightScheduleMgrJPanel) c;
+        fsm.populateTable();
+        CardLayout layout = (CardLayout) rightJPanel.getLayout();
         layout.previous(rightJPanel);
     }//GEN-LAST:event_btnBackActionPerformed
 
@@ -397,27 +414,38 @@ public class UpdateFlightJPanel extends javax.swing.JPanel {
              JOptionPane.showMessageDialog(null, "Invalid input!", "Warning", JOptionPane.WARNING_MESSAGE);
         }
         else{
+             try {
+                if (DateInput()) {
             fs.setFlightNumber(txtFlightNum.getText());
+            Airplane airplane = (Airplane)airplaneComboBox.getSelectedItem();
+            fs.setAirplane(airplane);
             fs.setFrom(txtFrom.getText());
             fs.setTo(txtTo.getText());
 
-            fs.setDepartureDate(departureDate());
+            fs.setDepartureDate(dateToString(departureDateChooser.getDate()));
             fs.setDepartureHour(departureHourComboBox.getSelectedItem().toString());
             fs.setDepartureMin(departureMinComboBox.getSelectedItem().toString());
-            fs.setDepartureTime(departureTime());
+            fs.setDepartureTime(fs.getDepartureHour() + ":" + fs.getDepartureMin());
 
 
-            fs.setArrivalDate(arrivalDate());
+            fs.setArrivalDate(dateToString(arrivalDateChooser.getDate()));
             fs.setArrivalHour(arrivalHourComboBox.getSelectedItem().toString());
             fs.setArrivalMin(arrivalMinComboBox.getSelectedItem().toString());
-            fs.setArrivalTime(arrivalDateTime());
+            fs.setArrivalTime(fs.getArrivalHour() + ":" + fs.getArrivalMin());
 
             fs.setStatus(statusComboBox.getSelectedItem().toString());
-            fs.setPrice(Integer.parseInt(txtPrice.getText()));
+            fs.setPrice(Double.parseDouble(txtPrice.getText()));
 
             JOptionPane.showMessageDialog(null, "Flight updated successfully!");
+            
+            }
+                else{
+                    JOptionPane.showMessageDialog(null, "Invalid time!", "Warning", JOptionPane.WARNING_MESSAGE);
+                }
+            } catch (ParseException ex) {
+                JOptionPane.showMessageDialog(null, ex);
+            }
         }
-                    
     }//GEN-LAST:event_btnSaveActionPerformed
 
 

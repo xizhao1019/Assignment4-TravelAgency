@@ -23,10 +23,10 @@ public class AdminLoginJPanel extends javax.swing.JPanel {
     /**
      * Creates new form AdminLoginJPanel
      */
-    public AdminLoginJPanel(JPanel rightJPanel, AirlinerDirectory ad, FlightScheduleCatalog fsc) {
+    public AdminLoginJPanel(JPanel rightJPanel, AirlinerDirectory ad) {
         this.rightJPanel = rightJPanel;
         this.airlinerDirectory = ad;
-        this.flightScheduleCatalog = fsc;
+        
         initComponents();
         
     }
@@ -107,7 +107,7 @@ public class AdminLoginJPanel extends javax.swing.JPanel {
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         CardLayout layout = (CardLayout)rightJPanel.getLayout();
-        rightJPanel.add(new AdminWorkAreaJPanel(rightJPanel, airlinerDirectory, flightScheduleCatalog));
+        rightJPanel.add(new AdminWorkAreaJPanel(rightJPanel, airlinerDirectory));
         layout.next(rightJPanel);
     }//GEN-LAST:event_btnSubmitActionPerformed
 
