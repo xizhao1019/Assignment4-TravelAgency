@@ -5,8 +5,12 @@
  */
 package UserInterface.Admin.Account;
 
+import Business.User.Account;
+import Business.User.Admin;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -15,13 +19,30 @@ import javax.swing.JPanel;
 public class AccountMgrJPanel extends javax.swing.JPanel {
     
     private JPanel rightJPanel;
+    private Admin admin;
     
     /**
      * Creates new form AccountMgrJPanel
      */
-    public AccountMgrJPanel(JPanel rightJPanel) {
+    public AccountMgrJPanel(JPanel rightJPanel, Admin admin) {
         initComponents();
         this.rightJPanel = rightJPanel;
+        this.admin = admin;
+        
+        populateTable();
+    }
+    
+    public void populateTable() {
+        DefaultTableModel model = (DefaultTableModel)accountTable.getModel();
+        model.setRowCount(0);
+        for (Account account : admin.getAccountDir().getAccountDir()) {         
+            Object row[] = new Object[3];
+            row[0] = account.getUserName();
+            row[1] = account.getPassWord();
+            row[2] = account.getAccountCreatDate();
+            
+            model.addRow(row);
+        }
     }
 
     /**
@@ -42,10 +63,7 @@ public class AccountMgrJPanel extends javax.swing.JPanel {
 
         accountTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Account Name", "Password", "Date Created"
@@ -74,6 +92,11 @@ public class AccountMgrJPanel extends javax.swing.JPanel {
         });
 
         btnDeleteAccount.setText("Delete");
+        btnDeleteAccount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteAccountActionPerformed(evt);
+            }
+        });
 
         btnBack.setText("<<Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -130,14 +153,29 @@ public class AccountMgrJPanel extends javax.swing.JPanel {
         CardLayout layout = (CardLayout)rightJPanel.getLayout();
         rightJPanel.remove(this);
         layout.previous(rightJPanel);
+        
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnAddAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddAccountActionPerformed
         // TODO add your handling code here:
         CardLayout layout = (CardLayout)rightJPanel.getLayout();
-        rightJPanel.add(new CreateAccountJPanel(rightJPanel));
+        rightJPanel.add(new CreateAccountJPanel(rightJPanel, admin));
         layout.next(rightJPanel);
     }//GEN-LAST:event_btnAddAccountActionPerformed
+
+    private void btnDeleteAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteAccountActionPerformed
+        // TODO add your handling code here:     
+        int row = accountTable.getSelectedRow();
+        if(row<0){
+            JOptionPane.showMessageDialog(null, "Please select a row!", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        Account acc = (Account)accountTable.getValueAt(row, 0);
+        admin.getAccountDir().deleteAccount(acc);
+        populateTable();
+        
+        JOptionPane.showMessageDialog(null, "Customer Account Deleted!");
+    }//GEN-LAST:event_btnDeleteAccountActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

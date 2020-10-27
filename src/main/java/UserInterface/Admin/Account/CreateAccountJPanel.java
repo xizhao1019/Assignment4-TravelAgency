@@ -5,7 +5,14 @@
  */
 package UserInterface.Admin.Account;
 
+import Business.User.Account;
+import Business.User.Admin;
 import java.awt.CardLayout;
+import java.awt.Component;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -15,13 +22,15 @@ import javax.swing.JPanel;
 public class CreateAccountJPanel extends javax.swing.JPanel {
 
     private JPanel rightJPanel;
+    private Admin admin;
     
     /**
      * Creates new form CreateAccountJPanel
      */
-    public CreateAccountJPanel(JPanel rightJPanel) {
+    public CreateAccountJPanel(JPanel rightJPanel, Admin admin) {
         initComponents();
         this.rightJPanel = rightJPanel;
+        this.admin = admin;
     }
 
     /**
@@ -109,14 +118,26 @@ public class CreateAccountJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        CardLayout layout = (CardLayout)rightJPanel.getLayout();
+        
         rightJPanel.remove(this);
+        Component [] componentArray = rightJPanel.getComponents();
+        Component c = componentArray[componentArray.length-1];
+        AccountMgrJPanel amjp = (AccountMgrJPanel) c;
+        amjp.populateTable();   
+        CardLayout layout = (CardLayout)rightJPanel.getLayout();
         layout.previous(rightJPanel);      
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
-       
+       Account account = admin.getAccountDir().addAccount();
+       Date time = new Date();
+       DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss");
+       String strDate = dateFormat.format(time);
+       account.setAccountCreatDate(strDate);
+       account.setUserName(txtUser.getText());
+       account.setPassWord(txtPword.getText());      
 
+       JOptionPane.showMessageDialog(null, "Customer Account Created!");
     }//GEN-LAST:event_btnCreateActionPerformed
 
 
