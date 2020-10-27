@@ -54,7 +54,7 @@ public class FlightScheduleMgrJPanel extends javax.swing.JPanel {
             row[6] = fs.getDepartureTime();
             row[7] = fs.getArrivalDate()+ " " + fs.getArrivalTime();
             row[8] = fs.getAirplane().getCapacity();
-            row[9] = fs.getAirplane().getCapacity();//neet to change to seatList.size();
+            row[9] = fs.getSeatList().getSeatList().size();
             row[10] = df.format(fs.getPrice());
             row[11] = fs.getStatus();
             
@@ -200,7 +200,7 @@ public class FlightScheduleMgrJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         int row = flightscheduleTable.getSelectedRow();
         if(row<0){
-            JOptionPane.showMessageDialog(null, "Please select a row!!", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Please select a row!", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
         FlightSchedule fs = (FlightSchedule)flightscheduleTable.getValueAt(row, 0);

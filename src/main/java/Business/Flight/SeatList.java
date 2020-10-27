@@ -12,12 +12,13 @@ import java.util.List;
  *
  * @author zhaoxi
  */
-class SeatList {
+public class SeatList {
 
  private List<Seat> seatList ;
  
     public SeatList() {
         seatList = new ArrayList<Seat>();
+        initial();
     }
 
     public List<Seat> getSeatList() {
@@ -37,5 +38,29 @@ class SeatList {
         seatList.remove(s);
     }
     
+    private void initial(){
+        for (int i = 1; i < 26; i++) {
+        Seat seat1 = new Seat();
+        Seat seat2 = new Seat();
+        Seat seat3 = new Seat();
+        Seat seat4 = new Seat();
+        Seat seat5 = new Seat();
+        Seat seat6 = new Seat();
+        
+        seat1.setSeat(i + "A");
+        seat2.setSeat(i + "B");
+        seat3.setSeat(i + "C");
+        seat4.setSeat(i + "D");
+        seat5.setSeat(i + "E");
+        seat6.setSeat(i + "F");
+
+        seatList.add(seat1);
+        seatList.add(seat2);
+        seatList.add(seat3);
+        seatList.add(seat4);
+        seatList.add(seat5);
+        seatList.add(seat6);
+        }
+    }
     
 }

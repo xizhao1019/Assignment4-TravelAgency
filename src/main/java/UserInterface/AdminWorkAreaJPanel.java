@@ -23,7 +23,6 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
     private JPanel rightJPanel;
     private AirlinerDirectory airlinerDir;
     private Airliner airliner;
-    private FlightScheduleCatalog fsc;
     /**
      * Creates new form AdminWorkAreaJPanel
      */
