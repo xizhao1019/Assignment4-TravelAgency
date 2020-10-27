@@ -18,7 +18,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -426,17 +425,7 @@ public class AddFlightJPanel extends javax.swing.JPanel {
                 if (DateInput()) {
                     Airliner airliner = (Airliner)airlinerComboBox.getSelectedItem();
                     FlightSchedule fs = airliner.getFlightScheduleCatalog().addFlight();
-                    //fs = fsc.addFlight();
                     fs.setAirliner(airliner);
-                    // will add airplane based on the airliner
-                    /*
-                    BOEING-B747
-                    BOEING-B767
-                    BOEING-B737
-                    AIRBUS-A380
-                    AIRBUS-A330
-                    AIRBUS-A319
-                    */
                     Airplane airplane = (Airplane)airplaneComboBox.getSelectedItem();
                     fs.setAirplane(airplane);
                     

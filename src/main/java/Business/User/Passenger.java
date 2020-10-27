@@ -6,7 +6,7 @@
 package Business.User;
 
 import Business.Flight.FlightSchedule;
-import Business.Flight.FlightScheduleCatalog;
+import Business.Flight.Seat;
 
 /**
  *
@@ -15,9 +15,10 @@ import Business.Flight.FlightScheduleCatalog;
 public class Passenger {
     private String firstName;
     private String lastName;
-    private int id;
-    private FlightScheduleCatalog fsc;
+    private String id;
+    private FlightSchedule fs;
     private Account account;
+    private Seat seat;
 
     public String getFirstName() {
         return firstName;
@@ -35,11 +36,11 @@ public class Passenger {
         this.lastName = lastName;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -51,12 +52,20 @@ public class Passenger {
         this.account = account;
     }
 
-    public FlightScheduleCatalog getFsc() {
-        return fsc;
+    public FlightSchedule getFs() {
+        return fs;
     }
 
-    public void setFsc(FlightScheduleCatalog fsc) {
-        this.fsc = fsc;
+    public void setFs(FlightSchedule fs) {
+        this.fs = fs;
+    }
+
+    public Seat getSeat() {
+        return seat;
+    }
+
+    public void setSeat(Seat seat) {
+        this.seat = seat;
     }
 
 }

@@ -49,7 +49,7 @@ public class ViewAirlinerJPanel extends javax.swing.JPanel {
             row[6] = fs.getDepartureTime();
             row[7] = fs.getArrivalDate()+ " " + fs.getArrivalTime();
             row[8] = fs.getAirplane().getCapacity();
-            row[9] = fs.getAirplane().getCapacity();//neet to change to seatList.size()
+            row[9] = fs.getSeatList().getSeatList().size();
             row[10] = df.format(fs.getPrice());
             row[11] = fs.getStatus();
            

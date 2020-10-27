@@ -19,12 +19,6 @@ public class Airliner {
         flightScheduleCatalog = new FlightScheduleCatalog();
     }
     
-    public Airliner(String airlinerName) {
-        this.airlinerName = airlinerName;
-        fleet = new Fleet();
-        flightScheduleCatalog = new FlightScheduleCatalog();
-    }
-
     public String getAirlinerName() {
         return airlinerName;
     }
