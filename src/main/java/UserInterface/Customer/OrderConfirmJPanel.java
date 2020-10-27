@@ -12,7 +12,10 @@ import Business.User.Account;
 import Business.User.Passenger;
 import Business.User.PassengerDirectory;
 import java.awt.CardLayout;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
@@ -63,7 +66,7 @@ public class OrderConfirmJPanel extends javax.swing.JPanel {
     private boolean inputNameCorrect(String s){
         Pattern p = Pattern.compile("^[a-zA-Z]+$");
         Matcher m = p.matcher(s);
-        boolean input = m.matches();
+        boolean input = m.matches();    // what is input? not s?
         return input;
     }
     
@@ -143,7 +146,7 @@ public class OrderConfirmJPanel extends javax.swing.JPanel {
 
         txtPrice.setEnabled(false);
 
-        btnCancel.setText("Cancel");
+        btnCancel.setText("Back");
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelActionPerformed(evt);
@@ -406,11 +409,16 @@ public class OrderConfirmJPanel extends javax.swing.JPanel {
             p.setId(id);
             p.setFs(selectedFlight);
             p.setSeat(seat);
-
-            Order order = account.addOrder();
+            //System.out.println(p.getLastName());   // for test
+            Order order = account.getOrderList().addOrder();
             order.setAccount(account);
             order.setPassenger(p);
             order.setFlight(selectedFlight);
+            
+            Date time = new Date();
+            DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss");
+            String strDate = dateFormat.format(time);
+            order.setOrderDate(strDate);
 
             JOptionPane.showMessageDialog(null, "Flight Book for " + firstName + " " + lastName +  " Success!");
         

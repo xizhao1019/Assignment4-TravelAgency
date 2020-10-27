@@ -143,7 +143,7 @@ public class BookFlightJPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
-    private void populateTable() {
+    public void populateTable() {
         DefaultTableModel model = (DefaultTableModel)flightScheduleTable.getModel();
         model.setRowCount(0);
         DecimalFormat df = new DecimalFormat("#.00"); 
