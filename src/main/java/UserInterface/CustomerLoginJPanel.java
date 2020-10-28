@@ -133,8 +133,9 @@ public class CustomerLoginJPanel extends javax.swing.JPanel {
     private boolean verify(){
         boolean search = false;
         String pword = txtPword.getText();
+        String userName = txtUser.getText();
         for (Account a : admin.getAccountDir().getAccountDir()) {
-            if(pword.equals(a.getPassWord())){
+            if(userName.equals(a.getUserName()) && pword.equals(a.getPassWord())){
                 search = true;
                 account = a;
                 break;
