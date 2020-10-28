@@ -5,7 +5,6 @@
  */
 package UserInterface.Customer;
 
-import Business.Flight.AirlinerDirectory;
 import Business.Flight.FlightSchedule;
 import Business.Flight.Seat;
 import Business.Order.Order;
@@ -24,19 +23,16 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author zhaoxi
+ * @author suoxiyue
  */
-public class OrderConfirmJPanel extends javax.swing.JPanel {
-
+public class OrderConfirmForSearchJPanel extends javax.swing.JPanel {
     private JPanel rightJPanel;
     private FlightSchedule selectedFlight;
     private Account account;
-   
-    
     /**
-     * Creates new form OrderConfirmJPanel
+     * Creates new form OrderConfirmForSearchJPanel
      */
-    public OrderConfirmJPanel(JPanel rightJPanel, FlightSchedule selectedFlight, Account account) {
+    public OrderConfirmForSearchJPanel(JPanel rightJPanel, FlightSchedule selectedFlight, Account account) {
         initComponents();
         this.rightJPanel = rightJPanel;
         this.selectedFlight = selectedFlight;
@@ -63,7 +59,7 @@ public class OrderConfirmJPanel extends javax.swing.JPanel {
             seatComboBox.addItem(seat.getSeat());
         }
     }
-
+    
     private boolean inputNameCorrect(String s){
         Pattern p = Pattern.compile("^[a-zA-Z]+$");
         Matcher m = p.matcher(s);
@@ -103,15 +99,20 @@ public class OrderConfirmJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel11 = new javax.swing.JLabel();
-        btnConfirm = new javax.swing.JButton();
-        txtPrice = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        txtDepartureTime = new javax.swing.JTextField();
         btnBack = new javax.swing.JButton();
+        txtAirliner = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        txtAirplane = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
+        txtDate = new javax.swing.JTextField();
         txtFirstname = new javax.swing.JTextField();
+        txtArrivalTime = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
+        txtTo = new javax.swing.JTextField();
         txtLastname = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         txtID = new javax.swing.JTextField();
@@ -125,27 +126,16 @@ public class OrderConfirmJPanel extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
         txtFrom = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        txtDepartureTime = new javax.swing.JTextField();
-        txtAirliner = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        txtAirplane = new javax.swing.JTextField();
-        txtDate = new javax.swing.JTextField();
-        txtArrivalTime = new javax.swing.JTextField();
-        txtTo = new javax.swing.JTextField();
+        btnConfirm = new javax.swing.JButton();
+        txtPrice = new javax.swing.JTextField();
 
-        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel11.setText("Price");
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel1.setText("Flight No.");
 
-        btnConfirm.setText("Confirm");
-        btnConfirm.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConfirmActionPerformed(evt);
-            }
-        });
-
-        txtPrice.setEnabled(false);
+        txtDepartureTime.setEditable(false);
+        txtDepartureTime.setEnabled(false);
 
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -154,23 +144,41 @@ public class OrderConfirmJPanel extends javax.swing.JPanel {
             }
         });
 
+        txtAirliner.setEditable(false);
+        txtAirliner.setEnabled(false);
+
         jLabel12.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel12.setText("Passenger Information");
+
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel6.setText("From");
 
         jLabel13.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel13.setText("Flight Information");
 
+        txtAirplane.setEditable(false);
+        txtAirplane.setEnabled(false);
+
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel14.setText("First Name");
 
+        txtDate.setEditable(false);
+        txtDate.setEnabled(false);
+
+        txtArrivalTime.setEditable(false);
+        txtArrivalTime.setEnabled(false);
+
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel15.setText("Last Name");
+
+        txtTo.setEditable(false);
+        txtTo.setEnabled(false);
 
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel16.setText("ID Number");
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel17.setText("Confirm Your Order");
+        jLabel17.setText("Confirm Your Order From Search");
 
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel10.setText("Date");
@@ -196,32 +204,20 @@ public class OrderConfirmJPanel extends javax.swing.JPanel {
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Arrival Time");
 
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel11.setText("Price");
+
         txtFrom.setEditable(false);
         txtFrom.setEnabled(false);
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel1.setText("Flight No.");
+        btnConfirm.setText("Confirm");
+        btnConfirm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmActionPerformed(evt);
+            }
+        });
 
-        txtDepartureTime.setEditable(false);
-        txtDepartureTime.setEnabled(false);
-
-        txtAirliner.setEditable(false);
-        txtAirliner.setEnabled(false);
-
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel6.setText("From");
-
-        txtAirplane.setEditable(false);
-        txtAirplane.setEnabled(false);
-
-        txtDate.setEditable(false);
-        txtDate.setEnabled(false);
-
-        txtArrivalTime.setEditable(false);
-        txtArrivalTime.setEnabled(false);
-
-        txtTo.setEditable(false);
-        txtTo.setEnabled(false);
+        txtPrice.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -312,7 +308,7 @@ public class OrderConfirmJPanel extends javax.swing.JPanel {
                                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(seatComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                .addGap(54, 54, 54))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -382,7 +378,7 @@ public class OrderConfirmJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnConfirm)
                     .addComponent(btnBack))
-                .addGap(21, 21, 21))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -391,15 +387,15 @@ public class OrderConfirmJPanel extends javax.swing.JPanel {
         rightJPanel.remove(this);
         Component [] componentArray = rightJPanel.getComponents();
         Component c = componentArray[componentArray.length-1];
-        BookFlightJPanel bfjp = (BookFlightJPanel) c;
-        bfjp.populateTable();;
-        
+        SearchFlightJPanel sfjp = (SearchFlightJPanel) c;
+        sfjp.populateTable(txtFrom.getText(), txtTo.getText(), txtDate.getText());;
+
         CardLayout layout = (CardLayout)rightJPanel.getLayout();
         layout.previous(rightJPanel);
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmActionPerformed
-        
+
         String firstName = txtFirstname.getText();
         String lastName = txtLastname.getText();
         String id = txtID.getText();
@@ -420,25 +416,25 @@ public class OrderConfirmJPanel extends javax.swing.JPanel {
             order.setAccount(account);
             order.setPassenger(p);
             order.setFlight(selectedFlight);
-            
+
             Date time = new Date();
             DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss");
             String strDate = dateFormat.format(time);
             order.setOrderDate(strDate);
 
             JOptionPane.showMessageDialog(null, "Flight Book for " + firstName + " " + lastName +  " Success!");
-        
+
             txtFirstname.setEnabled(false);
             txtLastname.setEnabled(false);
             txtID.setEnabled(false);
             seatComboBox.setEnabled(false);
-            
+
             int i = selectedFlight.getSeatList().getIndex(seat.getSeat());
-            //int index = selectedFlight.getSeatList().getSeatList().indexOf(seat);
+            //int index = selectedFlight.getSeatList().getSeatList().indexOf(seat.getSeat());
             selectedFlight.getSeatList().getSeatList().remove(i);
         }
     }//GEN-LAST:event_btnConfirmActionPerformed
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;

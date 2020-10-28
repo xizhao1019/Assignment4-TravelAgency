@@ -74,11 +74,11 @@ public class BookFlightJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Flight No.", "Airliner", "Airplane", "From", "To", "Date", "Departure", "Arrival", "Remaining", "Price"
+                "Flight No.", "Airliner", "Airplane", "From", "To", "Date", "Departure", "Arrival", "Remaining", "Price", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -107,6 +107,7 @@ public class BookFlightJPanel extends javax.swing.JPanel {
             flightScheduleTable.getColumnModel().getColumn(8).setPreferredWidth(70);
             flightScheduleTable.getColumnModel().getColumn(9).setResizable(false);
             flightScheduleTable.getColumnModel().getColumn(9).setPreferredWidth(70);
+            flightScheduleTable.getColumnModel().getColumn(10).setResizable(false);
         }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -149,7 +150,7 @@ public class BookFlightJPanel extends javax.swing.JPanel {
         DecimalFormat df = new DecimalFormat("#.00"); 
         for (Airliner airliner : airlinerDir.getAirlinerDirectory()) {
             for(FlightSchedule fs : airliner.getFlightScheduleCatalog().getFlightScheduleCatalog()){
-            Object row[] = new Object[10];
+            Object row[] = new Object[11];
             row[0] = fs;
             row[1] = fs.getAirliner();
             row[2] = fs.getAirplane();
@@ -160,6 +161,7 @@ public class BookFlightJPanel extends javax.swing.JPanel {
             row[7] = fs.getArrivalDate() + " " +fs.getArrivalTime();
             row[8] = fs.getSeatList().getSeatList().size();
             row[9] = df.format(fs.getPrice());
+            row[10] = fs.getStatus();
             
             model.addRow(row);
             }
@@ -179,7 +181,12 @@ public class BookFlightJPanel extends javax.swing.JPanel {
             return;
         }
         FlightSchedule selectedFlight = (FlightSchedule)flightScheduleTable.getValueAt(row, 0);
-        OrderConfirmJPanel ocjp = new OrderConfirmJPanel(rightJPanel,selectedFlight,account);
+        if (selectedFlight.getStatus() == "Cancel") {
+            JOptionPane.showMessageDialog(null, "This flight is cancelled!", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        OrderConfirmJPanel ocjp = new OrderConfirmJPanel(rightJPanel, selectedFlight, account);
         rightJPanel.add("OrderConfirmJPanel", ocjp);
         CardLayout layout = (CardLayout) rightJPanel.getLayout();
         layout.next(rightJPanel);

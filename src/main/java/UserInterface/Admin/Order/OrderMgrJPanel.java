@@ -32,7 +32,9 @@ public class OrderMgrJPanel extends javax.swing.JPanel {
     }
     
     public void populateTable() {
+        
         DefaultTableModel model = (DefaultTableModel)orderTable.getModel();
+        model.setRowCount(0);
         for (Account account : admin.getAccountDir().getAccountDir()) {
             for (Order order : account.getOrderList().getOrderList()) {
             Object row[] = new Object[12];
@@ -64,7 +66,6 @@ public class OrderMgrJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         btnBack = new javax.swing.JButton();
-        btnDelete = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         orderTable = new javax.swing.JTable();
         btnViewDetail = new javax.swing.JButton();
@@ -74,13 +75,6 @@ public class OrderMgrJPanel extends javax.swing.JPanel {
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBackActionPerformed(evt);
-            }
-        });
-
-        btnDelete.setText("Delete");
-        btnDelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeleteActionPerformed(evt);
             }
         });
 
@@ -150,9 +144,7 @@ public class OrderMgrJPanel extends javax.swing.JPanel {
                     .addComponent(btnBack)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(682, 682, 682)
-                        .addComponent(btnViewDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnViewDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 882, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -168,9 +160,7 @@ public class OrderMgrJPanel extends javax.swing.JPanel {
                 .addGap(38, 38, 38)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnDelete)
-                    .addComponent(btnViewDetail))
+                .addComponent(btnViewDetail)
                 .addGap(22, 22, 22))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -196,29 +186,9 @@ public class OrderMgrJPanel extends javax.swing.JPanel {
         layout.next(rightJPanel);
     }//GEN-LAST:event_btnViewDetailActionPerformed
 
-    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        // TODO add your handling code here:
-        int row = orderTable.getSelectedRow();
-        if(row<0){
-            JOptionPane.showMessageDialog(null, "Please select a row!", "Warning", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        Order selectOrder = (Order)orderTable.getValueAt(row, 0);
-        for (Account account : admin.getAccountDir().getAccountDir()) {
-            for (Order order : account.getOrderList().getOrderList()) {
-                if (order.equals(selectOrder)) {
-                    account.getOrderList().deleteOrder(order);
-                    populateTable();
-                    return;
-                }
-            }
-        }
-    }//GEN-LAST:event_btnDeleteActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnViewDetail;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
