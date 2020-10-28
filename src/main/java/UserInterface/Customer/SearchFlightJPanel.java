@@ -97,11 +97,11 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Flight No.", "Airliner", "Airplane", "From", "To", "Date", "Departure", "Arrival", "Remaining", "Price"
+                "Flight No.", "Airliner", "Airplane", "From", "To", "Date", "Departure", "Arrival", "Remaining", "Price", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -130,6 +130,7 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
             searchFlightTable.getColumnModel().getColumn(8).setPreferredWidth(70);
             searchFlightTable.getColumnModel().getColumn(9).setResizable(false);
             searchFlightTable.getColumnModel().getColumn(9).setPreferredWidth(70);
+            searchFlightTable.getColumnModel().getColumn(10).setResizable(false);
         }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -207,8 +208,13 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
             return;
         }
         FlightSchedule fs = (FlightSchedule)searchFlightTable.getValueAt(row, 0);
-        OrderConfirmJPanel ocjp = new OrderConfirmJPanel(rightJPanel,fs,account);
-        rightJPanel.add("OrderConfirmJPanel", ocjp);
+        if (fs.getStatus() == "Cancel") {
+            JOptionPane.showMessageDialog(null, "This flight is cancelled!", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        OrderConfirmForSearchJPanel ocfsjp = new OrderConfirmForSearchJPanel(rightJPanel,fs,account);
+        rightJPanel.add("OrderConfirmForSearchJPanel", ocfsjp);
         CardLayout layout = (CardLayout) rightJPanel.getLayout();
         layout.next(rightJPanel);
     }//GEN-LAST:event_btnBookActionPerformed
@@ -216,15 +222,14 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         String from = txtFrom.getText();
         String to = txtTo.getText();
+ 
         
-        Date date = DateChooser.getDate();
-        SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy");
-        String departureDate = format.format(date);
-        
-        if (from.trim().equals("") || to.trim().equals("") || departureDate.trim().equals("")) {
+        if (from.trim().equals("") || to.trim().equals("") || DateChooser.getDate() == null) {
               JOptionPane.showMessageDialog(null, "Invalid input!", "Warning", JOptionPane.WARNING_MESSAGE);
-        }
-        else{
+        } else{
+            Date date = DateChooser.getDate();
+            SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy");
+            String departureDate = format.format(date);
             populateTable(from, to, departureDate);
         }
     }//GEN-LAST:event_btnSearchActionPerformed
@@ -237,7 +242,7 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
         for (Airliner airliner : airlinerDir.getAirlinerDirectory()) {
             for(FlightSchedule fs : airliner.getFlightScheduleCatalog().getFlightScheduleCatalog()){
                 if (fs.getFrom().equalsIgnoreCase(from) && fs.getTo().equalsIgnoreCase(to) && fs.getDepartureDate().equalsIgnoreCase(departureDate)) {
-                    Object row[] = new Object[10];
+                    Object row[] = new Object[11];
                     row[0] = fs;
                     row[1] = fs.getAirliner();
                     row[2] = fs.getAirplane();
@@ -248,6 +253,7 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
                     row[7] = fs.getArrivalDate()+ " " + fs.getArrivalTime();
                     row[8] = fs.getSeatList().getSeatList().size();
                     row[9] = fs.getPrice();
+                    row[10] = fs.getStatus();
                     
                     model.addRow(row);
                     found = true;

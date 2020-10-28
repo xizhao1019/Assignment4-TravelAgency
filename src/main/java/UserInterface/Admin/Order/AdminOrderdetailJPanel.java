@@ -7,6 +7,7 @@ package UserInterface.Admin.Order;
 
 import Business.Order.Order;
 import java.awt.CardLayout;
+import java.awt.Component;
 import java.text.DecimalFormat;
 import javax.swing.JPanel;
 
@@ -29,11 +30,10 @@ public class AdminOrderdetailJPanel extends javax.swing.JPanel {
     }
     
     public void fillInfo() {
-         DecimalFormat df = new DecimalFormat("#.00"); 
          
         txtOrderNum.setText(Integer.toString(order.getOrderNumber()));
         txtOrderdate.setText(order.getOrderDate());
-        txtPrice.setText(df.format(Double.toString(order.getFlight().getPrice())));
+        txtPrice.setText(Double.toString(order.getFlight().getPrice()));
         
         txtFirstname.setText(order.getPassenger().getFirstName());
         txtLastname.setText(order.getPassenger().getLastName());
@@ -304,7 +304,7 @@ public class AdminOrderdetailJPanel extends javax.swing.JPanel {
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtOrderdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel19))
                         .addGap(26, 26, 26)
@@ -382,8 +382,9 @@ public class AdminOrderdetailJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        CardLayout layout = (CardLayout)rightJPanel.getLayout();
         rightJPanel.remove(this);
+        CardLayout layout = (CardLayout)rightJPanel.getLayout();
+        
         layout.previous(rightJPanel);
     }//GEN-LAST:event_btnBackActionPerformed
 

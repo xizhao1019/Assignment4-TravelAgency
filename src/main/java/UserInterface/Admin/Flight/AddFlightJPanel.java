@@ -106,6 +106,9 @@ public class AddFlightJPanel extends javax.swing.JPanel {
         if (txtPrice.getText().equals("") || !inputPriceCorrect(txtPrice.getText())) {
             inputfieldValid = false;
         }
+        if (txtFrom.getText().equals(txtTo.getText())) {
+            inputfieldValid = false;
+        }
         
         return inputfieldValid;
     }

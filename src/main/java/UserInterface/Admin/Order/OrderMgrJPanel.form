@@ -26,8 +26,6 @@
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="682" max="-2" attributes="0"/>
                       <Component id="btnViewDetail" min="-2" pref="100" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnDelete" min="-2" pref="100" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
@@ -48,10 +46,7 @@
               <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="154" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnDelete" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnViewDetail" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
+              <Component id="btnViewDetail" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -64,14 +59,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBackActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnDelete">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Delete"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDeleteActionPerformed"/>
       </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
