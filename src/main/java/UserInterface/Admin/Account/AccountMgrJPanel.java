@@ -37,7 +37,7 @@ public class AccountMgrJPanel extends javax.swing.JPanel {
         model.setRowCount(0);
         for (Account account : admin.getAccountDir().getAccountDir()) {         
             Object row[] = new Object[3];
-            row[0] = account.getUserName();
+            row[0] = account;
             row[1] = account.getPassWord();
             row[2] = account.getAccountCreatDate();
             
