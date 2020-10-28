@@ -39,7 +39,6 @@ UserInterface/Customer/SearchFlightJPanel$2.class
 UserInterface/CustomerWorkAreaJPanel$1.class
 UserInterface/Customer/CustomerOrderDetailJPanel.class
 UserInterface/Admin/Airliner/AddAirlinerJPanel$2.class
-UserInterface/Admin/Account/CreateAccountJPanel$2.class
 UserInterface/CustomerCreateAccountJPanel.class
 Business/User/PassengerDirectory.class
 UserInterface/Admin/Order/OrderMgrJPanel$2.class
@@ -52,7 +51,6 @@ UserInterface/Customer/CustomerOrderDetailJPanel$1.class
 Business/User/Admin.class
 UserInterface/AdminLoginJPanel.class
 UserInterface/AdminLoginJPanel$1.class
-UserInterface/Admin/Account/AccountMgrJPanel$4.class
 Business/User/AccountDirectory.class
 UserInterface/Admin/Airliner/ViewAirlinerJPanel$2.class
 UserInterface/Admin/Order/AdminOrderdetailJPanel$1.class
@@ -66,7 +64,6 @@ UserInterface/TravelAgencyMain$2.class
 UserInterface/Customer/BookFlightJPanel$2.class
 Business/Flight/Seat.class
 UserInterface/Admin/Order/AdminOrderdetailJPanel.class
-UserInterface/Admin/Account/CreateAccountJPanel.class
 Business/Order/Order.class
 UserInterface/Admin/Order/OrderMgrJPanel$1.class
 UserInterface/Admin/Flight/UpdateFlightJPanel$2.class
@@ -75,7 +72,6 @@ UserInterface/Admin/Flight/FlightScheduleMgrJPanel$5.class
 UserInterface/Admin/Flight/FlightScheduleMgrJPanel$2.class
 Business/Flight/Airliner.class
 UserInterface/Admin/Airliner/AirlinerMgrJPanel$1.class
-UserInterface/Admin/Account/CreateAccountJPanel$1.class
 UserInterface/Customer/SearchFlightJPanel$4.class
 UserInterface/TravelAgencyMain.class
 UserInterface/CustomerWorkAreaJPanel$2.class

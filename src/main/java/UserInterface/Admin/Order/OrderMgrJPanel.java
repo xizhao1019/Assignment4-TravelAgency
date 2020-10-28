@@ -101,6 +101,32 @@ public class OrderMgrJPanel extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(orderTable);
+        if (orderTable.getColumnModel().getColumnCount() > 0) {
+            orderTable.getColumnModel().getColumn(0).setResizable(false);
+            orderTable.getColumnModel().getColumn(0).setPreferredWidth(70);
+            orderTable.getColumnModel().getColumn(1).setResizable(false);
+            orderTable.getColumnModel().getColumn(1).setPreferredWidth(70);
+            orderTable.getColumnModel().getColumn(2).setResizable(false);
+            orderTable.getColumnModel().getColumn(2).setPreferredWidth(70);
+            orderTable.getColumnModel().getColumn(3).setResizable(false);
+            orderTable.getColumnModel().getColumn(3).setPreferredWidth(70);
+            orderTable.getColumnModel().getColumn(4).setResizable(false);
+            orderTable.getColumnModel().getColumn(4).setPreferredWidth(50);
+            orderTable.getColumnModel().getColumn(5).setResizable(false);
+            orderTable.getColumnModel().getColumn(5).setPreferredWidth(70);
+            orderTable.getColumnModel().getColumn(6).setResizable(false);
+            orderTable.getColumnModel().getColumn(6).setPreferredWidth(70);
+            orderTable.getColumnModel().getColumn(7).setResizable(false);
+            orderTable.getColumnModel().getColumn(7).setPreferredWidth(100);
+            orderTable.getColumnModel().getColumn(8).setResizable(false);
+            orderTable.getColumnModel().getColumn(8).setPreferredWidth(70);
+            orderTable.getColumnModel().getColumn(9).setResizable(false);
+            orderTable.getColumnModel().getColumn(9).setPreferredWidth(50);
+            orderTable.getColumnModel().getColumn(10).setResizable(false);
+            orderTable.getColumnModel().getColumn(10).setPreferredWidth(70);
+            orderTable.getColumnModel().getColumn(11).setResizable(false);
+            orderTable.getColumnModel().getColumn(11).setPreferredWidth(130);
+        }
 
         btnViewDetail.setText("View Detail");
         btnViewDetail.addActionListener(new java.awt.event.ActionListener() {

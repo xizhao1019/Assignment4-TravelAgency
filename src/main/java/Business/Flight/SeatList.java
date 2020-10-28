@@ -34,10 +34,6 @@ public class SeatList {
         seatList.add(s);
     }
     
-    public void removeSeat(Seat s){
-        seatList.remove(s);
-    }
-    
     private void initial(){
         for (int i = 1; i < 26; i++) {
             Seat seat1 = new Seat();
@@ -61,6 +57,15 @@ public class SeatList {
             seatList.add(seat5);
             seatList.add(seat6);
         }
+    }
+    
+    public int getIndex(String seat){
+        for (int i = 0; i < seatList.size() ; i++) {
+            if (seat.equals(seatList.get(i).getSeat())) {
+                return i;
+            }
+        }
+        return -1;
     }
     
 }
