@@ -117,13 +117,13 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
             searchFlightTable.getColumnModel().getColumn(2).setResizable(false);
             searchFlightTable.getColumnModel().getColumn(2).setPreferredWidth(100);
             searchFlightTable.getColumnModel().getColumn(3).setResizable(false);
-            searchFlightTable.getColumnModel().getColumn(3).setPreferredWidth(50);
+            searchFlightTable.getColumnModel().getColumn(3).setPreferredWidth(70);
             searchFlightTable.getColumnModel().getColumn(4).setResizable(false);
-            searchFlightTable.getColumnModel().getColumn(4).setPreferredWidth(50);
+            searchFlightTable.getColumnModel().getColumn(4).setPreferredWidth(70);
             searchFlightTable.getColumnModel().getColumn(5).setResizable(false);
             searchFlightTable.getColumnModel().getColumn(5).setPreferredWidth(100);
             searchFlightTable.getColumnModel().getColumn(6).setResizable(false);
-            searchFlightTable.getColumnModel().getColumn(6).setPreferredWidth(60);
+            searchFlightTable.getColumnModel().getColumn(6).setPreferredWidth(70);
             searchFlightTable.getColumnModel().getColumn(7).setResizable(false);
             searchFlightTable.getColumnModel().getColumn(7).setPreferredWidth(130);
             searchFlightTable.getColumnModel().getColumn(8).setResizable(false);
@@ -131,6 +131,7 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
             searchFlightTable.getColumnModel().getColumn(9).setResizable(false);
             searchFlightTable.getColumnModel().getColumn(9).setPreferredWidth(70);
             searchFlightTable.getColumnModel().getColumn(10).setResizable(false);
+            searchFlightTable.getColumnModel().getColumn(10).setPreferredWidth(70);
         }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -138,36 +139,37 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(445, 445, 445))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 852, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtFrom, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(38, 38, 38)
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtTo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(38, 38, 38)
-                                .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(DateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(40, 40, 40)
-                                .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(386, 386, 386)
-                                .addComponent(btnBook, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(19, 19, 19))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 900, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtFrom, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtTo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38)
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(DateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40)
+                        .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel17)
-                        .addGap(366, 366, 366))))
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(btnBook, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(406, 406, 406))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel17)
+                                .addGap(366, 366, 366)))))
+                .addGap(15, 15, 15))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,7 +178,7 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
                 .addComponent(btnBack)
                 .addGap(15, 15, 15)
                 .addComponent(jLabel17)
-                .addGap(18, 18, 18)
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnSearch)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -186,7 +188,7 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
                         .addComponent(txtTo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel10))
                     .addComponent(DateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addComponent(btnBook)
@@ -210,6 +212,11 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
         FlightSchedule fs = (FlightSchedule)searchFlightTable.getValueAt(row, 0);
         if (fs.getStatus() == "Cancel") {
             JOptionPane.showMessageDialog(null, "This flight is cancelled!", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        if (fs.getStatus() == "Full") {
+            JOptionPane.showMessageDialog(null, "This flight is full!", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
         
@@ -255,6 +262,9 @@ public class SearchFlightJPanel extends javax.swing.JPanel {
                     row[9] = fs.getPrice();
                     row[10] = fs.getStatus();
                     
+                    if (fs.getStatus() == "Full") {
+                        row[8] = "0";
+                    }
                     model.addRow(row);
                     found = true;
                 }
