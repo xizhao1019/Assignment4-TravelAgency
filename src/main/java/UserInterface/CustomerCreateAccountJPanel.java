@@ -133,17 +133,30 @@ public class CustomerCreateAccountJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "UserName should be in format of xx@xx.xx");
             txtUser.setBorder(BorderFactory.createLineBorder(Color.red));
             lblUserName.setForeground(Color.red);
+        } else if (!isUniqueUsername()) {
+            JOptionPane.showMessageDialog(null, "UserName should be unique");
+            txtUser.setBorder(BorderFactory.createLineBorder(Color.red));
+            lblUserName.setForeground(Color.red);
         } else if (!validPassword) {
+            txtUser.setBorder(null);
+            lblUserName.setForeground(Color.BLACK);
             JOptionPane.showMessageDialog(null, "Password should be at least 5 digits, with at least one letter and one digit");
             txtPword.setBorder(BorderFactory.createLineBorder(Color.red));
             lblPass.setForeground(Color.red);
-        } else if (!txtRePword.getText().equals(txtPword.getText())) {            
+        } else if (!txtRePword.getText().equals(txtPword.getText())) {  
             JOptionPane.showMessageDialog(null, "Passwords do not match.");
             txtPword.setBorder(BorderFactory.createLineBorder(Color.red));
             txtRePword.setBorder(BorderFactory.createLineBorder(Color.red));
             lblPass.setForeground(Color.red);
             lblRePass.setForeground(Color.red);
         } else {
+            txtUser.setBorder(null);
+            txtPword.setBorder(null);
+            txtRePword.setBorder(null);
+            lblUserName.setForeground(Color.BLACK);
+            lblPass.setForeground(Color.BLACK);
+            lblRePass.setForeground(Color.BLACK);
+            
             String userName = txtUser.getText();
             String pw   = txtPword.getText();
             String rpw = txtRePword.getText();
@@ -183,6 +196,17 @@ public class CustomerCreateAccountJPanel extends javax.swing.JPanel {
         }
         Matcher m = p.matcher(txtPword.getText());
         return m.matches();
+    }
+    
+    private boolean isUniqueUsername() {
+        boolean unique = true;
+        for (int i = 0; i < admin.getAccountDir().getAccountDir().size(); i++) {
+            if (txtUser.getText().equals(admin.getAccountDir().getAccountDir().get(i).getUserName())) {
+                unique = false;
+                break;
+            }
+        }
+        return unique;
     }
     
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
