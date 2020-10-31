@@ -6,15 +6,30 @@
 
 package UserInterface;
 
+import Business.Flight.AirlinerDirectory;
+import Business.User.AccountDirectory;
+import Business.User.Admin;
+import Business.User.PassengerDirectory;
+import java.awt.CardLayout;
+
 /**
  *
  * @author zhaoxi
  */
 public class TravelAgencyMain extends javax.swing.JFrame {
 
+    private Admin admin;
+    private AirlinerDirectory airlinerDirectory;
+    private AccountDirectory accountDir;
+    
     /** Creates new form TravelAgencyMain */
     public TravelAgencyMain() {
+        
         initComponents();
+        setSize(1200, 500);
+        setLocation(200, 100);
+        admin = new Admin();
+        airlinerDirectory = new AirlinerDirectory();
     }
 
     /** This method is called from within the constructor to
@@ -36,59 +51,56 @@ public class TravelAgencyMain extends javax.swing.JFrame {
 
         MainSplitPane.setDividerLocation(150);
 
+        leftJPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         btnAdmin.setText("Admin");
+        btnAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdminActionPerformed(evt);
+            }
+        });
+        leftJPanel.add(btnAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 110, -1));
 
         btnCustomer.setText("Customer");
-
-        javax.swing.GroupLayout leftJPanelLayout = new javax.swing.GroupLayout(leftJPanel);
-        leftJPanel.setLayout(leftJPanelLayout);
-        leftJPanelLayout.setHorizontalGroup(
-            leftJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(leftJPanelLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(leftJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnCustomer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnAdmin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(23, 23, 23))
-        );
-        leftJPanelLayout.setVerticalGroup(
-            leftJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(leftJPanelLayout.createSequentialGroup()
-                .addGap(152, 152, 152)
-                .addComponent(btnAdmin)
-                .addGap(31, 31, 31)
-                .addComponent(btnCustomer)
-                .addGap(146, 146, 146))
-        );
+        btnCustomer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCustomerActionPerformed(evt);
+            }
+        });
+        leftJPanel.add(btnCustomer, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 110, 30));
 
         MainSplitPane.setLeftComponent(leftJPanel);
 
-        javax.swing.GroupLayout rightJPanelLayout = new javax.swing.GroupLayout(rightJPanel);
-        rightJPanel.setLayout(rightJPanelLayout);
-        rightJPanelLayout.setHorizontalGroup(
-            rightJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 386, Short.MAX_VALUE)
-        );
-        rightJPanelLayout.setVerticalGroup(
-            rightJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 387, Short.MAX_VALUE)
-        );
-
+        rightJPanel.setLayout(new java.awt.CardLayout());
         MainSplitPane.setRightComponent(rightJPanel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(MainSplitPane, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(MainSplitPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 610, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(MainSplitPane, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(MainSplitPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminActionPerformed
+        // TODO add your handling code here:
+        CardLayout layout = (CardLayout)rightJPanel.getLayout();
+        rightJPanel.add(new AdminLoginJPanel(rightJPanel, airlinerDirectory, admin));
+        layout.next(rightJPanel);
+    }//GEN-LAST:event_btnAdminActionPerformed
+
+    private void btnCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomerActionPerformed
+        // TODO add your handling code here:
+        CardLayout layout = (CardLayout)rightJPanel.getLayout();
+        rightJPanel.add(new CustomerLoginJPanel(rightJPanel,airlinerDirectory,admin));
+        layout.next(rightJPanel);
+    }//GEN-LAST:event_btnCustomerActionPerformed
 
     /**
      * @param args the command line arguments

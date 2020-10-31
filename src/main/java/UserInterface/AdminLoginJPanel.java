@@ -5,17 +5,34 @@
  */
 package UserInterface;
 
+import Business.Flight.AirlinerDirectory;
+import Business.Flight.FlightScheduleCatalog;
+import Business.User.Admin;
+import java.awt.CardLayout;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 /**
  *
  * @author zhaoxi
  */
 public class AdminLoginJPanel extends javax.swing.JPanel {
 
+    private FlightScheduleCatalog flightScheduleCatalog;
+    private AirlinerDirectory airlinerDirectory;
+    
+    private JPanel rightJPanel;
+    private Admin admin;
     /**
      * Creates new form AdminLoginJPanel
      */
-    public AdminLoginJPanel() {
+    public AdminLoginJPanel(JPanel rightJPanel, AirlinerDirectory ad, Admin admin) {
+        this.rightJPanel = rightJPanel;
+        this.airlinerDirectory = ad;
+        this.admin = admin;
+        
         initComponents();
+        
     }
 
     /**
@@ -28,12 +45,13 @@ public class AdminLoginJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         txtTitle = new javax.swing.JLabel();
-        txtPword = new javax.swing.JTextField();
+        txtUser = new javax.swing.JTextField();
         btnSubmit = new javax.swing.JButton();
-        txtPword1 = new javax.swing.JTextField();
+        txtPword = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
+        txtTitle.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         txtTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtTitle.setText("Admin Login Screen");
 
@@ -59,8 +77,8 @@ public class AdminLoginJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtPword, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                    .addComponent(txtPword1))
+                    .addComponent(txtUser, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                    .addComponent(txtPword))
                 .addGap(105, 105, 105))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -68,7 +86,7 @@ public class AdminLoginJPanel extends javax.swing.JPanel {
                         .addGap(129, 129, 129)
                         .addComponent(txtTitle))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(152, 152, 152)
+                        .addGap(157, 157, 157)
                         .addComponent(btnSubmit)))
                 .addGap(146, 146, 146))
         );
@@ -79,11 +97,11 @@ public class AdminLoginJPanel extends javax.swing.JPanel {
                 .addComponent(txtTitle)
                 .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPword1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(37, 37, 37)
                 .addComponent(btnSubmit)
@@ -92,7 +110,13 @@ public class AdminLoginJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
-
+        if (txtUser.getText().equalsIgnoreCase("admin") && txtPword.getText().equalsIgnoreCase("admin")) {
+            CardLayout layout = (CardLayout)rightJPanel.getLayout();
+            rightJPanel.add(new AdminWorkAreaJPanel(rightJPanel, airlinerDirectory, admin));
+            layout.next(rightJPanel);          
+        } else {
+            JOptionPane.showMessageDialog(null, "Invalid username or password.");
+        }
     }//GEN-LAST:event_btnSubmitActionPerformed
 
 
@@ -101,7 +125,7 @@ public class AdminLoginJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField txtPword;
-    private javax.swing.JTextField txtPword1;
     private javax.swing.JLabel txtTitle;
+    private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
 }

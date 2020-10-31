@@ -5,17 +5,43 @@
  */
 package UserInterface.Admin.Account;
 
+import Business.User.Account;
+import Business.User.Admin;
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author zhaoxi
  */
 public class AccountMgrJPanel extends javax.swing.JPanel {
-
+    
+    private JPanel rightJPanel;
+    private Admin admin;
+    
     /**
      * Creates new form AccountMgrJPanel
      */
-    public AccountMgrJPanel() {
+    public AccountMgrJPanel(JPanel rightJPanel, Admin admin) {
         initComponents();
+        this.rightJPanel = rightJPanel;
+        this.admin = admin;
+        
+        populateTable();
+    }
+    
+    public void populateTable() {
+        DefaultTableModel model = (DefaultTableModel)accountTable.getModel();
+        model.setRowCount(0);
+        for (Account account : admin.getAccountDir().getAccountDir()) {         
+            Object row[] = new Object[3];
+            row[0] = account;
+            row[1] = account.getPassWord();
+            row[2] = account.getAccountCreatDate();
+            
+            model.addRow(row);
+        }
     }
 
     /**
@@ -29,15 +55,12 @@ public class AccountMgrJPanel extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         accountTable = new javax.swing.JTable();
-        btnAddAccount = new javax.swing.JButton();
-        btnDeleteAccount = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
+        jLabel17 = new javax.swing.JLabel();
 
         accountTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Account Name", "Password", "Date Created"
@@ -54,46 +77,66 @@ public class AccountMgrJPanel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(accountTable);
         if (accountTable.getColumnModel().getColumnCount() > 0) {
             accountTable.getColumnModel().getColumn(0).setResizable(false);
+            accountTable.getColumnModel().getColumn(0).setPreferredWidth(100);
             accountTable.getColumnModel().getColumn(1).setResizable(false);
+            accountTable.getColumnModel().getColumn(1).setPreferredWidth(70);
             accountTable.getColumnModel().getColumn(2).setResizable(false);
+            accountTable.getColumnModel().getColumn(2).setPreferredWidth(150);
         }
 
-        btnAddAccount.setText("Add");
+        btnBack.setText("<<Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
-        btnDeleteAccount.setText("Delete");
+        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel17.setText("Customer Account");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jLabel17)
+                .addGap(154, 154, 154))
             .addGroup(layout.createSequentialGroup()
-                .addGap(43, 43, 43)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnAddAccount)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnDeleteAccount))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(53, 53, 53))
+                        .addComponent(btnBack)
+                        .addGap(450, 450, 450))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(68, 68, 68))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(btnBack)
+                .addGap(7, 7, 7)
+                .addComponent(jLabel17)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAddAccount)
-                    .addComponent(btnDeleteAccount))
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(67, 67, 67))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        CardLayout layout = (CardLayout)rightJPanel.getLayout();
+        rightJPanel.remove(this);
+        layout.previous(rightJPanel);
+        
+    }//GEN-LAST:event_btnBackActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable accountTable;
-    private javax.swing.JButton btnAddAccount;
-    private javax.swing.JButton btnDeleteAccount;
+    private javax.swing.JButton btnBack;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

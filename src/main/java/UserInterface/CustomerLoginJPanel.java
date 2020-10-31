@@ -5,17 +5,43 @@
  */
 package UserInterface;
 
+import Business.Flight.AirlinerDirectory;
+import Business.User.Account;
+import Business.User.AccountDirectory;
+import Business.User.Admin;
+import Business.User.PassengerDirectory;
+import java.awt.CardLayout;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 /**
  *
  * @author zhaoxi
  */
 public class CustomerLoginJPanel extends javax.swing.JPanel {
-
+    
+    private JPanel rightJPanel;
+    private AirlinerDirectory airlinerDir; 
+    private Admin admin;
+    private AccountDirectory accountDir;
+    private Account account;
+    private PassengerDirectory passengerDir;
     /**
      * Creates new form CustomerLoginJPanel
      */
-    public CustomerLoginJPanel() {
+    public CustomerLoginJPanel(JPanel rightJPanel,AirlinerDirectory airlinerDir,Admin admin) {
         initComponents();
+        this.rightJPanel = rightJPanel;
+        this.airlinerDir = airlinerDir;
+        this.admin = admin;
+        
+        // for test
+//        int s = admin.getAccountDir().getAccountDir().size();
+//        System.out.println(s);
+//        if (s > 0) {
+//            for (Account a : admin.getAccountDir().getAccountDir())
+//                System.out.println(a.getPassWord());
+//        }
     }
 
     /**
@@ -30,29 +56,30 @@ public class CustomerLoginJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtTitle = new javax.swing.JLabel();
+        txtUser = new javax.swing.JTextField();
+        btnLogin = new javax.swing.JButton();
         txtPword = new javax.swing.JTextField();
-        btnSubmit = new javax.swing.JButton();
-        txtPword1 = new javax.swing.JTextField();
-        btnSubmit1 = new javax.swing.JButton();
+        btnCreate = new javax.swing.JButton();
 
         jLabel1.setText("Username");
 
         jLabel2.setText("Password");
 
+        txtTitle.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         txtTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtTitle.setText("Customer Login Screen");
 
-        btnSubmit.setText("Login");
-        btnSubmit.addActionListener(new java.awt.event.ActionListener() {
+        btnLogin.setText("Login");
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSubmitActionPerformed(evt);
+                btnLoginActionPerformed(evt);
             }
         });
 
-        btnSubmit1.setText("Create");
-        btnSubmit1.addActionListener(new java.awt.event.ActionListener() {
+        btnCreate.setText("Create");
+        btnCreate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSubmit1ActionPerformed(evt);
+                btnCreateActionPerformed(evt);
             }
         });
 
@@ -63,22 +90,23 @@ public class CustomerLoginJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(117, 117, 117)
-                        .addComponent(btnSubmit)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnSubmit1))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(130, 130, 130)
                         .addComponent(txtTitle))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(101, 101, 101)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtPword)
-                            .addComponent(txtPword1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(117, 117, 117)
+                            .addComponent(btnLogin)
+                            .addGap(25, 25, 25)
+                            .addComponent(btnCreate))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGap(101, 101, 101)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel1)
+                                .addComponent(jLabel2))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtUser)
+                                .addComponent(txtPword, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(115, 115, 115))
         );
         layout.setVerticalGroup(
@@ -88,36 +116,61 @@ public class CustomerLoginJPanel extends javax.swing.JPanel {
                 .addComponent(txtTitle)
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPword1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSubmit)
-                    .addComponent(btnSubmit1))
+                    .addComponent(btnLogin)
+                    .addComponent(btnCreate))
                 .addGap(47, 47, 47))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
+    private boolean verify(){
+        boolean search = false;
+        String pword = txtPword.getText();
+        String userName = txtUser.getText();
+        for (Account a : admin.getAccountDir().getAccountDir()) {
+            if(userName.equals(a.getUserName()) && pword.equals(a.getPassWord())){
+                search = true;
+                account = a;
+                break;
+            }
+        }
+        return search;
+    }
+    
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        if (verify()) {
+        CardLayout layout = (CardLayout)rightJPanel.getLayout();
+        CustomerWorkAreaJPanel cwajp = new CustomerWorkAreaJPanel(rightJPanel,airlinerDir,account);
+        rightJPanel.add("CustomerWorkAreaJPanel", cwajp);
+        layout.next(rightJPanel);
+        }
+        else JOptionPane.showMessageDialog(null,"Wrong username or password!");
+        
+    }//GEN-LAST:event_btnLoginActionPerformed
 
-    }//GEN-LAST:event_btnSubmitActionPerformed
-
-    private void btnSubmit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmit1ActionPerformed
+    private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnSubmit1ActionPerformed
+        CardLayout layout = (CardLayout)rightJPanel.getLayout();
+        rightJPanel.add(new CustomerCreateAccountJPanel(rightJPanel,admin));
+        layout.next(rightJPanel);
+        
+    }//GEN-LAST:event_btnCreateActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnSubmit;
-    private javax.swing.JButton btnSubmit1;
+    private javax.swing.JButton btnCreate;
+    private javax.swing.JButton btnLogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField txtPword;
-    private javax.swing.JTextField txtPword1;
     private javax.swing.JLabel txtTitle;
+    private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
 }

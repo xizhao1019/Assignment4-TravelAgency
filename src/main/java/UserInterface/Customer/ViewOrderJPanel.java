@@ -5,18 +5,52 @@
  */
 package UserInterface.Customer;
 
+import Business.Order.Order;
+import Business.User.Account;
+import java.awt.CardLayout;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author zhaoxi
  */
 public class ViewOrderJPanel extends javax.swing.JPanel {
 
+    private JPanel rightJPanel;
+    private Account account;
     /**
      * Creates new form ViewOrderJPanel
      */
-    public ViewOrderJPanel() {
+    public ViewOrderJPanel(JPanel rightJPanel, Account account) {
         initComponents();
+        this.rightJPanel = rightJPanel;
+        this.account = account;
+        populateTable();
     }
+    
+    public void populateTable() {
+        DefaultTableModel model = (DefaultTableModel) orderTable.getModel();
+        model.setRowCount(0);
+        for (Order order : account.getOrderList().getOrderList()) {
+            Object row[] = new Object[12];
+            row[0] = order;
+            row[1] = order.getPassenger().getFirstName();
+            row[2] = order.getPassenger().getLastName();
+            row[3] = order.getPassenger().getId();
+            row[4] = order.getFlight().getAirliner().getAirlinerName();
+            row[5] = order.getFlight().getFrom();           
+            row[6] = order.getFlight().getTo();
+            row[7] = order.getFlight().getDepartureDate();
+            row[8] = order.getFlight().getDepartureTime();
+            row[9] = order.getPassenger().getSeat().getSeat();
+            row[10] = order.getFlight().getPrice();
+            row[11] = order.getOrderDate();        
+                    
+            model.addRow(row);
+            }
+        }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -30,18 +64,22 @@ public class ViewOrderJPanel extends javax.swing.JPanel {
         btnBack = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         orderTable = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         btnBack.setText("<<Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         orderTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
-                "Order No.", "Username", "Airliner", "Airplane", "From", "To", "Date", "Departure", "Arrival", "Seat", "Price", "Order Date"
+                "Order No.", "First Name", "Last Name", "ID Number", "Airliner", "From", "To", "Date", "Departure", "Seat", "Price", "Order Date"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -55,44 +93,105 @@ public class ViewOrderJPanel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(orderTable);
         if (orderTable.getColumnModel().getColumnCount() > 0) {
             orderTable.getColumnModel().getColumn(0).setResizable(false);
+            orderTable.getColumnModel().getColumn(0).setPreferredWidth(70);
             orderTable.getColumnModel().getColumn(1).setResizable(false);
+            orderTable.getColumnModel().getColumn(1).setPreferredWidth(70);
             orderTable.getColumnModel().getColumn(2).setResizable(false);
+            orderTable.getColumnModel().getColumn(2).setPreferredWidth(70);
             orderTable.getColumnModel().getColumn(3).setResizable(false);
+            orderTable.getColumnModel().getColumn(3).setPreferredWidth(70);
             orderTable.getColumnModel().getColumn(4).setResizable(false);
+            orderTable.getColumnModel().getColumn(4).setPreferredWidth(70);
             orderTable.getColumnModel().getColumn(5).setResizable(false);
+            orderTable.getColumnModel().getColumn(5).setPreferredWidth(70);
             orderTable.getColumnModel().getColumn(6).setResizable(false);
+            orderTable.getColumnModel().getColumn(6).setPreferredWidth(70);
             orderTable.getColumnModel().getColumn(7).setResizable(false);
+            orderTable.getColumnModel().getColumn(7).setPreferredWidth(100);
             orderTable.getColumnModel().getColumn(8).setResizable(false);
+            orderTable.getColumnModel().getColumn(8).setPreferredWidth(70);
             orderTable.getColumnModel().getColumn(9).setResizable(false);
+            orderTable.getColumnModel().getColumn(9).setPreferredWidth(50);
             orderTable.getColumnModel().getColumn(10).setResizable(false);
+            orderTable.getColumnModel().getColumn(10).setPreferredWidth(70);
             orderTable.getColumnModel().getColumn(11).setResizable(false);
+            orderTable.getColumnModel().getColumn(11).setPreferredWidth(150);
         }
+
+        jButton1.setText("View Detail");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setText("View Your Orders");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 819, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(14, 14, 14))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(353, 353, 353)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(395, 395, 395)
+                        .addComponent(jButton1)))
+                .addGap(370, 370, 370))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(btnBack)
+                .addGap(9, 9, 9)
+                .addComponent(jLabel1)
+                .addGap(35, 35, 35)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41))
+                .addComponent(jButton1)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        CardLayout layout = (CardLayout)rightJPanel.getLayout();
+        rightJPanel.remove(this);
+        layout.previous(rightJPanel);
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        int row = orderTable.getSelectedRow();
+        if(row<0){
+            JOptionPane.showMessageDialog(null, "Please select a row!", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+            Order order = (Order)orderTable.getValueAt(row, 0);
+            CustomerOrderDetailJPanel codjp = new CustomerOrderDetailJPanel(rightJPanel, order, account);
+            rightJPanel.add("CustomerOrderDetailJPanel", codjp);
+            CardLayout layout = (CardLayout) rightJPanel.getLayout();
+            layout.next(rightJPanel);
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable orderTable;
     // End of variables declaration//GEN-END:variables

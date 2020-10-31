@@ -5,19 +5,61 @@
  */
 package UserInterface.Admin.Airliner;
 
+import Business.Flight.Airliner;
+import Business.Flight.FlightSchedule;
+import Business.Flight.FlightScheduleCatalog;
+import java.awt.CardLayout;
+import java.text.DecimalFormat;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author zhaoxi
  */
 public class ViewAirlinerJPanel extends javax.swing.JPanel {
-
+    
+    private JPanel rightJPanel;
+    private Airliner airliner;
+    private FlightScheduleCatalog fsc;
     /**
      * Creates new form ViewAirlinerJPanel
      */
-    public ViewAirlinerJPanel() {
+    public ViewAirlinerJPanel(JPanel rightJPanel, Airliner airliner, FlightScheduleCatalog fsc) {
         initComponents();
+        this.rightJPanel = rightJPanel;
+        this.airliner = airliner;
+        this.fsc = fsc;
+        airlinerLabel.setText(airliner.getAirlinerName());
+        viewTable();
     }
 
+    public void viewTable(){
+        DefaultTableModel dtm = (DefaultTableModel) viewAirlinerTable.getModel();
+        dtm.setRowCount(0);
+        DecimalFormat df = new DecimalFormat("#.00"); 
+        for(FlightSchedule fs: airliner.getFlightScheduleCatalog().getFlightScheduleCatalog()){
+            Object row[] = new Object[12];
+            row[0] = fs;
+            row[1] = fs.getAirliner();
+            row[2] = fs.getAirplane();
+            row[3] = fs.getFrom();
+            row[4] = fs.getTo();
+            row[5] = fs.getDepartureDate();
+            row[6] = fs.getDepartureTime();
+            row[7] = fs.getArrivalDate()+ " " + fs.getArrivalTime();
+            row[8] = fs.getAirplane().getCapacity();
+            row[9] = fs.getSeatList().getSeatList().size();
+            row[10] = df.format(fs.getPrice());
+            row[11] = fs.getStatus();
+            
+            if (fs.getStatus() == "Full") {
+                        row[9] = "0";
+            }
+            
+            dtm.addRow(row);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,26 +69,41 @@ public class ViewAirlinerJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
         airlinerLabel = new javax.swing.JLabel();
+        btnBack = new javax.swing.JButton();
+        jLabel17 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         viewAirlinerTable = new javax.swing.JTable();
-        btnBack = new javax.swing.JButton();
 
+        jButton1.setText("jButton1");
+
+        setPreferredSize(new java.awt.Dimension(950, 350));
+
+        airlinerLabel.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        airlinerLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         airlinerLabel.setText("XXX Airliner");
+
+        btnBack.setText("<<Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
+        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel17.setText("Airliner Flights");
 
         viewAirlinerTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
-                "Airliner", "Flight No.", "Airplane", "From", "To", "Date", "Departure", "Arrival", "Duration", "Capacity", "Remaining", "Status", "Price"
+                "Flight No.", "Airliner", "Airplane", "From", "To", "Date", "Departure", "Arrival", "Capacity", "Remaining", "Price", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -56,51 +113,75 @@ public class ViewAirlinerJPanel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(viewAirlinerTable);
         if (viewAirlinerTable.getColumnModel().getColumnCount() > 0) {
             viewAirlinerTable.getColumnModel().getColumn(0).setResizable(false);
+            viewAirlinerTable.getColumnModel().getColumn(0).setPreferredWidth(70);
             viewAirlinerTable.getColumnModel().getColumn(1).setResizable(false);
+            viewAirlinerTable.getColumnModel().getColumn(1).setPreferredWidth(50);
             viewAirlinerTable.getColumnModel().getColumn(2).setResizable(false);
+            viewAirlinerTable.getColumnModel().getColumn(2).setPreferredWidth(100);
             viewAirlinerTable.getColumnModel().getColumn(3).setResizable(false);
+            viewAirlinerTable.getColumnModel().getColumn(3).setPreferredWidth(50);
             viewAirlinerTable.getColumnModel().getColumn(4).setResizable(false);
+            viewAirlinerTable.getColumnModel().getColumn(4).setPreferredWidth(50);
             viewAirlinerTable.getColumnModel().getColumn(5).setResizable(false);
+            viewAirlinerTable.getColumnModel().getColumn(5).setPreferredWidth(100);
             viewAirlinerTable.getColumnModel().getColumn(6).setResizable(false);
+            viewAirlinerTable.getColumnModel().getColumn(6).setPreferredWidth(70);
             viewAirlinerTable.getColumnModel().getColumn(7).setResizable(false);
+            viewAirlinerTable.getColumnModel().getColumn(7).setPreferredWidth(130);
             viewAirlinerTable.getColumnModel().getColumn(8).setResizable(false);
+            viewAirlinerTable.getColumnModel().getColumn(8).setPreferredWidth(70);
             viewAirlinerTable.getColumnModel().getColumn(9).setResizable(false);
+            viewAirlinerTable.getColumnModel().getColumn(9).setPreferredWidth(70);
             viewAirlinerTable.getColumnModel().getColumn(10).setResizable(false);
+            viewAirlinerTable.getColumnModel().getColumn(10).setPreferredWidth(70);
             viewAirlinerTable.getColumnModel().getColumn(11).setResizable(false);
-            viewAirlinerTable.getColumnModel().getColumn(12).setResizable(false);
+            viewAirlinerTable.getColumnModel().getColumn(11).setPreferredWidth(70);
         }
-
-        btnBack.setText("<<Back");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(airlinerLabel)
-                    .addComponent(btnBack)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 872, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(airlinerLabel)
+                            .addComponent(btnBack)
+                            .addComponent(jScrollPane1)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(376, 376, 376)
+                        .addComponent(jLabel17)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(31, 31, 31)
+                .addComponent(jLabel17)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(airlinerLabel)
-                .addGap(33, 33, 33)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
+                .addGap(18, 18, 18)
                 .addComponent(btnBack)
                 .addGap(12, 12, 12))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        rightJPanel.remove(this);
+        CardLayout layout = (CardLayout) rightJPanel.getLayout();
+        layout.previous(rightJPanel);
+    }//GEN-LAST:event_btnBackActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel airlinerLabel;
     private javax.swing.JButton btnBack;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable viewAirlinerTable;
     // End of variables declaration//GEN-END:variables
